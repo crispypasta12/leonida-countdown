@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { TARGETS } from "@/lib/countdown";
 import { CountdownConsole } from "./CountdownConsole";
 import { CountdownRail } from "./CountdownRail";
@@ -35,13 +36,32 @@ export function Hero() {
               Welcome to Leonida
             </p>
 
-            <h1 className="hero-depth-front font-display text-glow-pink text-[clamp(3rem,14vw,8.8rem)] font-normal uppercase leading-[0.8] sm:text-[clamp(4.2rem,10vw,9.4rem)]">
-              <span className="block bg-gradient-to-b from-paper to-paper/76 bg-clip-text text-transparent">
-                Grand Theft
-              </span>
-              <span className="block bg-gradient-to-r from-pink via-sunset to-cyan bg-clip-text text-transparent">
-                Auto VI
-              </span>
+            <h1
+              className="hero-depth-front hero-logo-lockup relative isolate w-[min(78vw,20rem)] sm:-ml-3 sm:w-[min(58vw,34rem)] lg:w-[34rem]"
+              aria-label="Grand Theft Auto VI"
+            >
+              <span
+                className="absolute inset-x-[8%] bottom-[3%] -z-10 h-[28%] rounded-full bg-pink/28 blur-2xl"
+                aria-hidden
+              />
+              <span
+                className="absolute inset-[7%] -z-10 bg-[radial-gradient(ellipse_at_50%_45%,rgba(255,46,151,0.22),transparent_56%),radial-gradient(ellipse_at_54%_72%,rgba(22,224,255,0.16),transparent_52%)] blur-xl"
+                aria-hidden
+              />
+              <Image
+                src="/art/brand/gtavi-logo.png"
+                alt=""
+                width={764}
+                height={612}
+                priority
+                sizes="(max-width: 640px) 78vw, (max-width: 1024px) 58vw, 34rem"
+                className="relative h-auto w-full drop-shadow-[0_24px_54px_rgba(0,0,0,0.48)]"
+                draggable={false}
+              />
+              <span
+                className="pointer-events-none absolute inset-0 rounded-[2rem] bg-[linear-gradient(115deg,transparent_0%,transparent_42%,rgba(255,255,255,0.2)_48%,transparent_55%,transparent_100%)] opacity-25 mix-blend-screen"
+                aria-hidden
+              />
             </h1>
 
             <p className="hero-depth-mid mt-4 max-w-xl text-balance text-base font-medium leading-relaxed text-paper/78 sm:text-xl">

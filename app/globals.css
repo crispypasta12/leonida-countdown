@@ -137,6 +137,21 @@ svg {
   animation: hero-depth-front 16s ease-in-out infinite alternate;
 }
 
+.hero-logo-lockup {
+  filter: saturate(1.04) contrast(1.02);
+}
+
+.hero-logo-lockup::after {
+  content: "";
+  position: absolute;
+  inset: 8% 10% 4%;
+  z-index: -1;
+  border-radius: 30%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.1), transparent 42%);
+  opacity: 0.6;
+  mix-blend-mode: screen;
+}
+
 .cast-scan {
   background: repeating-linear-gradient(
     to bottom,
