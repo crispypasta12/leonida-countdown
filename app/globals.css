@@ -107,6 +107,17 @@ body {
   animation: hero-sweep 9s ease-in-out infinite;
 }
 
+.cast-scan {
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0px,
+    rgba(0, 0, 0, 0) 2px,
+    rgba(0, 0, 0, 0.22) 3px,
+    rgba(0, 0, 0, 0) 4px
+  );
+  mix-blend-mode: overlay;
+}
+
 .travel-grid {
   background-image:
     linear-gradient(rgba(253, 246, 238, 0.25) 1px, transparent 1px),

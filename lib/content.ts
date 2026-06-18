@@ -51,12 +51,24 @@ export const POSTCARDS: Postcard[] = [
   },
 ];
 
+/**
+ * Cloudinary motion clips. Built from public IDs so transformations
+ * (f_auto = best codec, q_auto = adaptive quality, w_* = downscale) keep the
+ * 4K source masters from being shipped to the browser at full weight.
+ */
+const CLOUD = "dknzybvga";
+export function cldVideo(publicId: string, width = 720): string {
+  return `https://res.cloudinary.com/${CLOUD}/video/upload/f_auto,q_auto,w_${width}/${publicId}.mp4`;
+}
+
 export type CastMember = {
   src: string;
   name: string;
   role: string;
   blurb: string;
   accent: string;
+  /** One or two Cloudinary clips. Two = cross-fade (the couple). */
+  videos: string[];
 };
 
 export const CAST: CastMember[] = [
@@ -66,6 +78,10 @@ export const CAST: CastMember[] = [
     role: "The Couple",
     blurb: "A modern-day Bonnie and Clyde with everything to lose and a state full of reasons to run.",
     accent: "#FF2E97",
+    videos: [
+      cldVideo("Jason_Duval_Video_Clip_yiffa2", 1280),
+      cldVideo("Lucia_Caminos_Video_Clip_gubblc", 1280),
+    ],
   },
   {
     src: "/art/cast/boobie-ike.jpg",
@@ -73,6 +89,7 @@ export const CAST: CastMember[] = [
     role: "The Mogul",
     blurb: "Built an empire from the ground up. He pours the champagne; somebody else pays the tab.",
     accent: "#FF8A3D",
+    videos: [cldVideo("Boobie_Ike_Video_Clip_xv4rux")],
   },
   {
     src: "/art/cast/raul-bautista.jpg",
@@ -80,6 +97,7 @@ export const CAST: CastMember[] = [
     role: "The Operator",
     blurb: "Always on schedule, always on the move. The kind of professional you only meet once.",
     accent: "#16E0FF",
+    videos: [cldVideo("Raul_Bautista_Video_Clip_kr0cpr")],
   },
   {
     src: "/art/cast/real-dimez.jpg",
@@ -87,6 +105,7 @@ export const CAST: CastMember[] = [
     role: "The Duo",
     blurb: "Going viral one clip at a time - and turning clout into cold, hard cash.",
     accent: "#7B3FE4",
+    videos: [cldVideo("Real_Dimez_Video_Clip_fybnym")],
   },
   {
     src: "/art/cast/drequan-priest.jpg",
@@ -94,6 +113,7 @@ export const CAST: CastMember[] = [
     role: "The Hustler",
     blurb: "Knows every corner, every connect, every angle. Knowledge is the only currency that matters.",
     accent: "#16E0FF",
+    videos: [cldVideo("DreQuan_Priest_Video_Clip_ezsvur")],
   },
   {
     src: "/art/cast/cal-hampton.jpg",
@@ -101,6 +121,7 @@ export const CAST: CastMember[] = [
     role: "The Insider",
     blurb: "Lives behind a wall of screens. If it's online, he's already seen it.",
     accent: "#FF2E97",
+    videos: [cldVideo("Cal_Hampton_Video_Clip_sg0woz")],
   },
   {
     src: "/art/cast/brian-heder.jpg",
@@ -108,5 +129,6 @@ export const CAST: CastMember[] = [
     role: "The Fixer",
     blurb: "Out on the water where the law gets blurry. He keeps the boats - and the deals - afloat.",
     accent: "#FF8A3D",
+    videos: [cldVideo("Brian_Heder_Video_Clip_tzemxp")],
   },
 ];

@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { CAST } from "@/lib/content";
+import { CastCard } from "./CastCard";
 
 export function Cast() {
   return (
@@ -21,53 +21,18 @@ export function Cast() {
           </p>
         </header>
 
+        <p className="mb-6 text-center text-xs font-medium uppercase tracking-[0.2em] text-paper/40">
+          Hover a card to roll the tape
+        </p>
         <ul className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:auto-rows-[18rem] lg:grid-cols-4">
           {CAST.map((c, i) => (
             <li
               key={c.name}
-              className={`group relative overflow-hidden rounded-lg bg-white/[0.03] ring-1 ring-white/10 transition duration-500 hover:-translate-y-2 ${
+              className={`relative overflow-hidden rounded-lg bg-white/[0.03] ring-1 ring-white/10 transition duration-500 hover:-translate-y-2 ${
                 i === 0 ? "sm:col-span-2 lg:row-span-2" : ""
               }`}
             >
-              <article className="relative h-full min-h-[22rem]">
-                <Image
-                  src={c.src}
-                  alt={`${c.name} - ${c.role}`}
-                  fill
-                  sizes={
-                    i === 0
-                      ? "(max-width: 1024px) 100vw, 50vw"
-                      : "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                  }
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/24 to-transparent" />
-                <div className="absolute inset-0 bg-gradient-to-r from-ink/35 via-transparent to-transparent opacity-80" />
-                <div
-                  className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                  style={{ boxShadow: `inset 0 0 0 2px ${c.accent}, inset 0 -90px 90px -38px ${c.accent}A0` }}
-                />
-                <div className="light-scan pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-
-                <div className="absolute inset-x-0 bottom-0 p-5">
-                  <span
-                    className="text-[0.62rem] font-bold uppercase tracking-[0.22em]"
-                    style={{ color: c.accent }}
-                  >
-                    {c.role}
-                  </span>
-                  <h3
-                    className={`font-display uppercase leading-none tracking-wide text-paper ${
-                      i === 0 ? "text-4xl sm:text-5xl" : "text-2xl"
-                    }`}
-                  >
-                    {c.name}
-                  </h3>
-                  <p className="mt-3 max-w-md text-sm leading-relaxed text-paper/82 sm:text-xs">
-                    {c.blurb}
-                  </p>
-                </div>
-              </article>
+              <CastCard member={c} featured={i === 0} />
             </li>
           ))}
         </ul>
