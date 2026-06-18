@@ -241,7 +241,7 @@ export function CastCard({ member, featured, compact = false, spotlight = false,
         ) : null}
 
         {!compact ? (
-          <div className="pointer-events-none absolute left-3 top-3 z-10 rounded-full border border-white/15 bg-black/45 p-2 backdrop-blur-sm">
+          <div className="pointer-events-none absolute left-3 top-3 z-10 rounded-md border border-white/[0.14] bg-black/45 p-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-sm">
             <span
               className="block h-2 w-2 rounded-full"
               style={{
@@ -253,7 +253,7 @@ export function CastCard({ member, featured, compact = false, spotlight = false,
         ) : null}
 
         {compact ? (
-          <div className="pointer-events-none absolute bottom-3 left-3 z-10 max-w-[calc(100%-1.5rem)] rounded-full border border-white/15 bg-black/60 px-2.5 py-1 backdrop-blur-sm">
+          <div className="pointer-events-none absolute bottom-3 left-3 z-10 max-w-[calc(100%-1.5rem)] rounded-sm border border-white/[0.14] border-l-[3px] border-l-[var(--accent)] bg-black/62 px-2.5 py-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-sm">
             <span className="block truncate font-mono text-[0.58rem] font-bold uppercase tracking-[0.16em] text-paper">
               {member.name}
             </span>
@@ -270,7 +270,7 @@ export function CastCard({ member, featured, compact = false, spotlight = false,
 
         {showMotion ? (
           <div
-            className="pointer-events-none absolute right-3 top-14 flex items-center gap-1.5 rounded-full bg-black/55 px-2.5 py-1 backdrop-blur-sm transition-all duration-300"
+            className="pointer-events-none absolute right-3 top-14 flex items-center gap-1.5 rounded-sm border border-white/[0.12] border-l-[3px] border-l-[#FF2E97] bg-black/58 px-2.5 py-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-sm transition-all duration-300"
             style={{ opacity: ready && live ? 1 : 0, transform: ready && live ? "translateY(0)" : "translateY(-6px)" }}
           >
             <span className="inline-block h-2 w-2 rounded-full bg-[#FF2E97] animate-pulse-glow" />

@@ -117,7 +117,7 @@ export function CastSpotlight({ member, layout = "mobile" }: CastSpotlightProps)
         />
         <div className="pointer-events-none absolute inset-3 rounded-md ring-1 ring-[var(--accent)]/60" />
 
-        <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full bg-black/55 px-3 py-1.5 backdrop-blur-sm">
+        <div className="absolute left-4 top-4 flex items-center gap-2 rounded-sm border border-white/[0.14] border-l-[3px] bg-black/58 px-3 py-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-sm" style={{ borderLeftColor: member.accent }}>
           <span
             className="h-2 w-2 rounded-full animate-pulse-glow"
             style={{ backgroundColor: member.accent, boxShadow: `0 0 14px ${member.accent}` }}

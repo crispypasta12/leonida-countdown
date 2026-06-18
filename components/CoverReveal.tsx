@@ -19,13 +19,13 @@ export function CoverReveal() {
           </p>
 
           <div className="mt-6 flex flex-wrap gap-2 sm:mt-7 sm:gap-3">
-            <span className="rounded-full bg-ink px-3 py-2 text-[0.68rem] font-black uppercase tracking-[0.16em] text-paper sm:px-4 sm:text-xs sm:tracking-[0.22em]">
+            <span className="border-l-2 border-pink bg-ink px-3 py-2 text-[0.68rem] font-black uppercase tracking-[0.16em] text-paper shadow-[0_14px_34px_rgba(11,6,20,0.16)] sm:px-4 sm:text-xs sm:tracking-[0.22em]">
               Pre-order June 25
             </span>
-            <span className="rounded-full border border-ink/20 bg-white/70 px-3 py-2 text-[0.68rem] font-black uppercase tracking-[0.16em] text-ink sm:px-4 sm:text-xs sm:tracking-[0.22em]">
+            <span className="border border-ink/20 border-l-2 border-l-cyan bg-white/72 px-3 py-2 text-[0.68rem] font-black uppercase tracking-[0.16em] text-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.55)] sm:px-4 sm:text-xs sm:tracking-[0.22em]">
               PS5
             </span>
-            <span className="rounded-full border border-ink/20 bg-white/70 px-3 py-2 text-[0.68rem] font-black uppercase tracking-[0.16em] text-ink sm:px-4 sm:text-xs sm:tracking-[0.22em]">
+            <span className="border border-ink/20 border-l-2 border-l-sunset bg-white/72 px-3 py-2 text-[0.68rem] font-black uppercase tracking-[0.16em] text-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.55)] sm:px-4 sm:text-xs sm:tracking-[0.22em]">
               Xbox Series X|S
             </span>
           </div>
