@@ -58,7 +58,7 @@ export function Cast() {
                 key={c.name}
                 className={`relative overflow-hidden rounded-lg bg-white/[0.03] ring-1 ring-white/10 transition duration-500 hover:opacity-100 focus-within:opacity-100 ${
                   i === activeIndex
-                    ? "opacity-100 shadow-[0_20px_55px_-36px_var(--cast-accent)]"
+                    ? "opacity-100 ring-[var(--cast-accent)] shadow-[0_0_0_1px_var(--cast-accent),0_20px_55px_-32px_var(--cast-accent)]"
                     : "opacity-55"
                 }`}
               >

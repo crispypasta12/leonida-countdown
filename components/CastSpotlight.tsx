@@ -24,19 +24,25 @@ export function CastSpotlight({ member, layout = "mobile" }: CastSpotlightProps)
   }, [member.name]);
 
   useEffect(() => {
-    const vids = videoRefs.current.filter(Boolean) as HTMLVideoElement[];
-    if (reduced) {
-      vids.forEach((video) => video.pause());
-      return;
-    }
-
-    vids.forEach((video) => {
-      video.currentTime = 0;
-      const playPromise = video.play();
-      if (playPromise && typeof playPromise.catch === "function") {
-        playPromise.catch(() => {});
+    const startVideos = () => {
+      const vids = videoRefs.current.filter(Boolean) as HTMLVideoElement[];
+      if (reduced) {
+        vids.forEach((video) => video.pause());
+        return;
       }
-    });
+
+      vids.forEach((video) => {
+        video.currentTime = 0;
+        video.load();
+        const playPromise = video.play();
+        if (playPromise && typeof playPromise.catch === "function") {
+          playPromise.catch(() => {});
+        }
+      });
+    };
+
+    const frame = window.requestAnimationFrame(startVideos);
+    return () => window.cancelAnimationFrame(frame);
   }, [member.name, reduced]);
 
   useEffect(() => {
@@ -79,11 +85,13 @@ export function CastSpotlight({ member, layout = "mobile" }: CastSpotlightProps)
                 opacity: ready && (!dual || face === index) ? 1 : 0,
               }}
               src={url}
+              autoPlay
               muted
               loop={!dual}
               playsInline
-              preload="metadata"
+              preload="auto"
               aria-hidden
+              onCanPlay={() => setReady(true)}
               onLoadedData={() => setReady(true)}
               onEnded={
                 dual
