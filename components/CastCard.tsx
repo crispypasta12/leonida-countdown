@@ -16,11 +16,12 @@ import type { CastMember } from "@/lib/content";
 type CastCardProps = {
   member: CastMember;
   featured?: boolean;
+  compact?: boolean;
   spotlight?: boolean;
   onActivate?: () => void;
 };
 
-export function CastCard({ member, featured, spotlight = false, onActivate }: CastCardProps) {
+export function CastCard({ member, featured, compact = false, spotlight = false, onActivate }: CastCardProps) {
   const rootRef = useRef<HTMLDivElement>(null);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const [near, setNear] = useState(false); // close enough to attach src
@@ -62,6 +63,7 @@ export function CastCard({ member, featured, spotlight = false, onActivate }: Ca
 
   // Drive play/pause from `live`.
   useEffect(() => {
+    if (compact) return;
     const vids = videoRefs.current.filter(Boolean) as HTMLVideoElement[];
     if (live && near) {
       vids.forEach((v) => {
@@ -71,18 +73,18 @@ export function CastCard({ member, featured, spotlight = false, onActivate }: Ca
     } else {
       vids.forEach((v) => v.pause());
     }
-  }, [live, near]);
+  }, [compact, live, near]);
 
   // Cross-fade the couple's two clips on a gentle interval.
   useEffect(() => {
-    if (!dual || !live) return;
+    if (compact || !dual || !live) return;
     const id = setInterval(() => setFace((f) => (f === 0 ? 1 : 0)), 3600);
     return () => clearInterval(id);
-  }, [dual, live]);
+  }, [compact, dual, live]);
 
   const enter = useCallback(() => {
-    if (reducedRef.current || coarseRef.current) return;
     onActivate?.();
+    if (reducedRef.current || coarseRef.current) return;
     setNear(true);
     setActive(true);
   }, [onActivate]);
@@ -131,6 +133,8 @@ export function CastCard({ member, featured, spotlight = false, onActivate }: Ca
     "--glow-x": "50%",
     "--glow-y": "50%",
   } as CSSProperties;
+  const showMotion = !compact;
+  const indicatorLive = compact ? spotlight : ready && live;
 
   return (
     <div
@@ -150,8 +154,10 @@ export function CastCard({ member, featured, spotlight = false, onActivate }: Ca
       aria-label={`${member.name} — ${member.role}`}
     >
       <article
-        className="relative h-full min-h-[22rem] overflow-hidden rounded-lg transition-transform duration-300 ease-out
-                   [transform:perspective(900px)_rotateX(var(--tilt-x))_rotateY(var(--tilt-y))]"
+        className={`relative h-full overflow-hidden rounded-lg transition-transform duration-300 ease-out ${
+          compact ? "aspect-[3/4] min-h-0" : "min-h-[14.5rem] sm:min-h-[22rem]"
+        }
+                   [transform:perspective(900px)_rotateX(var(--tilt-x))_rotateY(var(--tilt-y))]`}
       >
         {/* Poster */}
         <Image
@@ -159,18 +165,22 @@ export function CastCard({ member, featured, spotlight = false, onActivate }: Ca
           alt={`${member.name} - ${member.role}`}
           fill
           sizes={
-            featured
+            compact
+              ? "(max-width: 1024px) 42vw, 12vw"
+              : featured
               ? "(max-width: 1024px) 100vw, 50vw"
               : "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
           }
-          className="object-cover transition duration-700 group-hover:scale-110 group-focus:scale-110"
+          className={`${compact ? "object-cover" : "object-cover group-hover:scale-110 group-focus:scale-110"} transition duration-700`}
           style={{
-            filter: live ? "saturate(1.16) contrast(1.06)" : "saturate(0.78) contrast(0.96)",
+            filter: live ? "saturate(1.16) contrast(1.06)" : "saturate(0.9) contrast(0.98)",
+            objectPosition: compact ? member.thumbnailPosition ?? "50% 32%" : undefined,
           }}
         />
 
         {/* Video layer(s) */}
-        {near &&
+        {showMotion &&
+          near &&
           member.videos.map((url, idx) => (
             <video
               key={url}
@@ -197,7 +207,7 @@ export function CastCard({ member, featured, spotlight = false, onActivate }: Ca
           ))}
 
         {/* Legibility + accent treatments */}
-        <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/24 to-transparent" />
+        <div className={`absolute inset-0 bg-gradient-to-t ${compact ? "from-ink/50 via-transparent to-ink/8" : "from-ink via-ink/24 to-transparent"}`} />
         <div className="absolute inset-0 bg-gradient-to-r from-ink/35 via-transparent to-transparent opacity-80" />
         <div
           className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-focus:opacity-100"
@@ -210,57 +220,75 @@ export function CastCard({ member, featured, spotlight = false, onActivate }: Ca
           className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-focus:opacity-100"
           style={{ boxShadow: `inset 0 0 0 2px ${member.accent}, inset 0 -90px 90px -38px ${member.accent}A0` }}
         />
-        <div className="light-scan pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-focus:opacity-100" />
-        <div
-          className="signal-flicker pointer-events-none absolute inset-0 transition-opacity duration-300"
-          style={{ opacity: ready && live ? 0.26 : 0 }}
-        />
-        <div
-          className="signal-acquire pointer-events-none absolute inset-x-0 top-0 h-full transition-opacity duration-300"
-          style={{ opacity: ready && live ? 0.36 : 0 }}
-        />
-        {/* Scanline veil only while the clip is playing */}
-        <div
-          className="cast-scan pointer-events-none absolute inset-0 transition-opacity duration-500"
-          style={{ opacity: ready && live ? 0.5 : 0 }}
-        />
+        {showMotion ? (
+          <div className="light-scan pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-focus:opacity-100" />
+        ) : null}
+        {showMotion ? (
+          <>
+            <div
+              className="signal-flicker pointer-events-none absolute inset-0 transition-opacity duration-300"
+              style={{ opacity: ready && live ? 0.26 : 0 }}
+            />
+            <div
+              className="signal-acquire pointer-events-none absolute inset-x-0 top-0 h-full transition-opacity duration-300"
+              style={{ opacity: ready && live ? 0.36 : 0 }}
+            />
+            <div
+              className="cast-scan pointer-events-none absolute inset-0 transition-opacity duration-500"
+              style={{ opacity: ready && live ? 0.5 : 0 }}
+            />
+          </>
+        ) : null}
 
-        <div className="pointer-events-none absolute left-3 top-3 z-10 rounded-full border border-white/15 bg-black/45 p-2 backdrop-blur-sm">
-          <span
-            className="block h-2 w-2 rounded-full"
-            style={{
-              backgroundColor: ready && live ? member.accent : "rgba(253,246,238,0.45)",
-              boxShadow: ready && live ? `0 0 14px ${member.accent}` : undefined,
-            }}
-          />
-        </div>
+        {!compact ? (
+          <div className="pointer-events-none absolute left-3 top-3 z-10 rounded-full border border-white/15 bg-black/45 p-2 backdrop-blur-sm">
+            <span
+              className="block h-2 w-2 rounded-full"
+              style={{
+                backgroundColor: indicatorLive ? member.accent : "rgba(253,246,238,0.45)",
+                boxShadow: indicatorLive ? `0 0 14px ${member.accent}` : undefined,
+              }}
+            />
+          </div>
+        ) : null}
 
-        <div className="pointer-events-none absolute left-3 top-14 z-10 h-14 w-px bg-gradient-to-b from-[var(--accent)] to-transparent opacity-70" />
-        <div className="pointer-events-none absolute right-3 top-14 z-10 h-14 w-px bg-gradient-to-b from-[var(--accent)] to-transparent opacity-70" />
-        <div className="pointer-events-none absolute inset-x-3 bottom-3 z-10 h-px bg-gradient-to-r from-transparent via-[var(--accent)] to-transparent opacity-70" />
+        {compact ? (
+          <div className="pointer-events-none absolute bottom-3 left-3 z-10 max-w-[calc(100%-1.5rem)] rounded-full border border-white/15 bg-black/60 px-2.5 py-1 backdrop-blur-sm">
+            <span className="block truncate font-mono text-[0.58rem] font-bold uppercase tracking-[0.16em] text-paper">
+              {member.name}
+            </span>
+          </div>
+        ) : null}
 
-        {/* REC badge while playing */}
-        <div
-          className="pointer-events-none absolute right-3 top-14 flex items-center gap-1.5 rounded-full bg-black/55 px-2.5 py-1 backdrop-blur-sm transition-all duration-300"
-          style={{ opacity: ready && live ? 1 : 0, transform: ready && live ? "translateY(0)" : "translateY(-6px)" }}
-        >
-          <span className="inline-block h-2 w-2 rounded-full bg-[#FF2E97] animate-pulse-glow" />
-          <span className="font-mono text-[0.6rem] font-bold uppercase tracking-[0.2em] text-paper">Rec</span>
-        </div>
+        {!compact ? (
+          <>
+            <div className="pointer-events-none absolute left-3 top-14 z-10 h-14 w-px bg-gradient-to-b from-[var(--accent)] to-transparent opacity-70" />
+            <div className="pointer-events-none absolute right-3 top-14 z-10 h-14 w-px bg-gradient-to-b from-[var(--accent)] to-transparent opacity-70" />
+            <div className="pointer-events-none absolute inset-x-3 bottom-3 z-10 h-px bg-gradient-to-r from-transparent via-[var(--accent)] to-transparent opacity-70" />
+          </>
+        ) : null}
 
-        <div className="absolute inset-x-0 bottom-0 p-5">
-          <span className="text-[0.62rem] font-bold uppercase tracking-[0.22em]" style={{ color: member.accent }}>
-            {member.role}
-          </span>
-          <h3
-            className={`font-display uppercase leading-none tracking-wide text-paper ${
-              featured ? "text-4xl sm:text-5xl" : "text-2xl"
-            }`}
+        {showMotion ? (
+          <div
+            className="pointer-events-none absolute right-3 top-14 flex items-center gap-1.5 rounded-full bg-black/55 px-2.5 py-1 backdrop-blur-sm transition-all duration-300"
+            style={{ opacity: ready && live ? 1 : 0, transform: ready && live ? "translateY(0)" : "translateY(-6px)" }}
           >
-            {member.name}
-          </h3>
-          <p className="mt-3 max-w-md text-sm leading-relaxed text-paper/82 sm:text-xs">{member.blurb}</p>
-        </div>
+            <span className="inline-block h-2 w-2 rounded-full bg-[#FF2E97] animate-pulse-glow" />
+            <span className="font-mono text-[0.6rem] font-bold uppercase tracking-[0.2em] text-paper">Rec</span>
+          </div>
+        ) : null}
+
+        {!compact ? (
+          <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
+            <span className="text-[0.58rem] font-bold uppercase tracking-[0.18em] sm:text-[0.62rem] sm:tracking-[0.22em]" style={{ color: member.accent }}>
+              {member.role}
+            </span>
+            <h3 className={`font-display uppercase leading-none tracking-wide text-paper ${featured ? "text-3xl sm:text-5xl" : "text-2xl"}`}>
+              {member.name}
+            </h3>
+            <p className="mt-2 max-w-md text-xs leading-relaxed text-paper/82 sm:mt-3">{member.blurb}</p>
+          </div>
+        ) : null}
       </article>
     </div>
   );

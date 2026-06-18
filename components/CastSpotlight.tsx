@@ -7,9 +7,10 @@ import type { CastMember } from "@/lib/content";
 
 type CastSpotlightProps = {
   member: CastMember;
+  layout?: "mobile" | "desktop";
 };
 
-export function CastSpotlight({ member }: CastSpotlightProps) {
+export function CastSpotlight({ member, layout = "mobile" }: CastSpotlightProps) {
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const [ready, setReady] = useState(false);
   const [face, setFace] = useState(0);
@@ -17,7 +18,6 @@ export function CastSpotlight({ member }: CastSpotlightProps) {
   const dual = member.videos.length > 1;
 
   useEffect(() => {
-    videoRefs.current = [];
     setReady(false);
     setFace(0);
     setReduced(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
@@ -31,6 +31,7 @@ export function CastSpotlight({ member }: CastSpotlightProps) {
     }
 
     vids.forEach((video) => {
+      video.currentTime = 0;
       const playPromise = video.play();
       if (playPromise && typeof playPromise.catch === "function") {
         playPromise.catch(() => {});
@@ -47,13 +48,16 @@ export function CastSpotlight({ member }: CastSpotlightProps) {
   const style = {
     "--accent": member.accent,
   } as CSSProperties;
+  const isDesktop = layout === "desktop";
 
   return (
     <div
-      className="relative mb-5 overflow-hidden rounded-lg bg-white/[0.04] ring-1 ring-white/10 lg:hidden"
+      className={`relative overflow-hidden rounded-lg bg-white/[0.04] ring-1 ring-white/10 ${
+        isDesktop ? "hidden lg:block" : "mb-5 lg:hidden"
+      }`}
       style={style}
     >
-      <div className="relative min-h-[28rem]">
+      <div className={`relative ${isDesktop ? "min-h-[42rem]" : "min-h-[23rem] min-[390px]:min-h-[25rem] sm:min-h-[30rem]"}`}>
         <Image
           src={member.src}
           alt={`${member.name} - ${member.role}`}
@@ -115,14 +119,18 @@ export function CastSpotlight({ member }: CastSpotlightProps) {
           </span>
         </div>
 
-        <div className="absolute inset-x-0 bottom-0 p-5">
-          <span className="text-[0.62rem] font-bold uppercase tracking-[0.22em]" style={{ color: member.accent }}>
+        <div className={`${isDesktop ? "absolute inset-x-0 bottom-0 p-7" : "absolute inset-x-0 bottom-0 p-4 sm:p-5"}`}>
+          <span className="text-[0.58rem] font-bold uppercase tracking-[0.18em] sm:text-[0.62rem] sm:tracking-[0.22em]" style={{ color: member.accent }}>
             {member.role}
           </span>
-          <h3 className="font-display text-5xl uppercase leading-none tracking-wide text-paper">
+          <h3
+            className={`font-display uppercase leading-none tracking-wide text-paper ${
+              isDesktop ? "text-7xl" : "text-[clamp(2.25rem,12vw,3.2rem)]"
+            }`}
+          >
             {member.name}
           </h3>
-          <p className="mt-3 max-w-md text-sm leading-relaxed text-paper/82">
+          <p className={`${isDesktop ? "mt-4 max-w-xl text-base" : "mt-2 max-w-md text-sm sm:mt-3"} leading-relaxed text-paper/82`}>
             {member.blurb}
           </p>
         </div>

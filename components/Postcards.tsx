@@ -1,34 +1,35 @@
 import Image from "next/image";
+import type { CSSProperties } from "react";
 import { POSTCARDS } from "@/lib/content";
 
 export function Postcards() {
   return (
-    <section id="postcards" className="relative overflow-hidden px-4 py-20 sm:py-28">
+    <section id="postcards" className="relative overflow-hidden px-3 py-16 sm:px-4 sm:py-28">
       <div className="absolute inset-0 opacity-[0.08] travel-grid" aria-hidden />
 
       <div className="relative mx-auto max-w-6xl">
-        <header className="mb-12 text-center">
-          <p className="mb-2 text-xs font-bold uppercase tracking-[0.35em] text-sunset sm:text-sm">
+        <header className="mb-9 text-center sm:mb-12">
+          <p className="mb-2 text-[0.65rem] font-bold uppercase tracking-[0.28em] text-sunset sm:text-sm sm:tracking-[0.35em]">
             Wish you were here
           </p>
-          <h2 className="font-display text-[clamp(2rem,7vw,4.6rem)] uppercase leading-none tracking-normal text-paper">
+          <h2 className="font-display text-[clamp(2rem,12vw,4.6rem)] uppercase leading-none tracking-normal text-paper sm:text-[clamp(2rem,7vw,4.6rem)]">
             Postcards from the Sunshine State
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-balance text-paper/65">
+          <p className="mx-auto mt-3 max-w-xl text-balance text-sm leading-relaxed text-paper/65 sm:mt-4 sm:text-base">
             Six stops across the state of Leonida. Pack light, leave fast, and don't
             forget to wave at the cameras.
           </p>
         </header>
 
-        <ul className="grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mobile-snap -mx-3 flex gap-4 overflow-x-auto px-3 pb-4 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-7 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3">
           {POSTCARDS.map((p) => (
-            <li key={p.name} className="group [perspective:1000px]">
+            <li key={p.name} className="group min-w-[82vw] snap-center [perspective:1000px] min-[420px]:min-w-[72vw] sm:min-w-0">
               <figure
                 className="relative overflow-hidden rounded-lg bg-paper p-2 shadow-2xl ring-1 ring-white/10 transition duration-500 ease-out group-hover:-translate-y-3 group-hover:scale-[1.02]"
                 style={{
-                  transform: `rotate(${p.tilt}deg)`,
+                  "--postcard-tilt": `${p.tilt}deg`,
                   boxShadow: `0 24px 70px -24px ${p.glow}A0`,
-                }}
+                } as CSSProperties}
               >
                 <span className="absolute left-1/2 top-1 z-20 h-7 w-24 -translate-x-1/2 -rotate-2 bg-white/55 shadow-sm backdrop-blur-sm" />
                 <span
@@ -54,7 +55,7 @@ export function Postcards() {
                 </div>
 
                 <figcaption className="absolute inset-x-0 bottom-0 z-10 p-5">
-                  <h3 className="font-display text-3xl uppercase leading-none tracking-wide text-paper">
+                  <h3 className="font-display text-[1.7rem] uppercase leading-none tracking-wide text-paper sm:text-3xl">
                     {p.name}
                   </h3>
                   <p className="mt-1 max-w-[18rem] text-xs font-medium text-paper/78">{p.tagline}</p>

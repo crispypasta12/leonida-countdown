@@ -39,19 +39,19 @@ function DigitGroup({
 }) {
   const digitSize =
     variant === "feature"
-      ? "text-[clamp(1.35rem,6.2vw,3rem)]"
+      ? "text-[clamp(1.18rem,5.7vw,3rem)]"
       : variant === "compact"
-        ? "text-[clamp(1.05rem,4.8vw,1.8rem)]"
+        ? "text-[clamp(0.95rem,4.5vw,1.8rem)]"
         : "text-[clamp(1.3rem,4.6vw,2.15rem)]";
 
   return (
     <div className="flex min-w-0 flex-col items-center gap-1.5">
-      <div className={`flex gap-[2px] leading-none ${digitSize}`}>
+      <div className={`flex max-w-full gap-[2px] leading-none ${digitSize}`}>
         {value.split("").map((d, i) => (
           <FlipDigit key={i} value={d} />
         ))}
       </div>
-      <span className="text-[0.58rem] font-semibold uppercase tracking-[0.2em] text-paper/55 sm:text-xs">
+      <span className="text-[0.55rem] font-semibold uppercase tracking-[0.16em] text-paper/55 sm:text-xs sm:tracking-[0.2em]">
         {label}
       </span>
     </div>
@@ -111,20 +111,20 @@ export function CountdownConsole({
   const shell =
     variant === "feature"
       ? `relative w-full max-w-3xl overflow-hidden rounded-lg border border-white/15
-         bg-ink/50 p-4 shadow-[0_0_70px_rgba(255,46,151,0.28),0_0_90px_rgba(22,224,255,0.14)]
+         bg-ink/50 p-3 shadow-[0_0_70px_rgba(255,46,151,0.28),0_0_90px_rgba(22,224,255,0.14)]
          ring-1 ring-white/10 backdrop-blur-2xl sm:p-5`
       : variant === "compact"
         ? `relative w-full max-w-lg overflow-hidden rounded-lg border ${a.border}
-           bg-white/[0.07] p-4 backdrop-blur-xl ${a.glow} sm:p-5`
+           bg-white/[0.07] p-3 backdrop-blur-xl ${a.glow} sm:p-5`
         : `relative w-full max-w-md overflow-hidden rounded-lg border ${a.border}
            bg-white/[0.06] p-5 backdrop-blur-xl ${a.glow} sm:p-6`;
 
   const titleSize =
     variant === "feature"
-      ? "text-3xl sm:text-4xl lg:text-5xl"
-      : "text-2xl sm:text-3xl";
+      ? "text-[1.65rem] sm:text-4xl lg:text-5xl"
+      : "text-xl sm:text-3xl";
 
-  const digitGap = variant === "feature" ? "gap-1.5 sm:gap-2.5" : "gap-1";
+  const digitGap = variant === "feature" ? "gap-1 sm:gap-2.5" : "gap-0.5 sm:gap-1";
 
   return (
     <div className={shell}>
@@ -139,10 +139,10 @@ export function CountdownConsole({
       />
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/50 to-transparent" />
 
-      <div className="relative mb-4 flex items-center justify-between gap-2">
-        <div>
+      <div className="relative mb-3 flex items-center justify-between gap-2 sm:mb-4">
+        <div className="min-w-0">
           <div
-            className={`flex items-center gap-2 text-[0.65rem] font-bold uppercase tracking-[0.25em] ${a.text}`}
+            className={`flex items-center gap-2 text-[0.58rem] font-bold uppercase tracking-[0.18em] ${a.text} sm:text-[0.65rem] sm:tracking-[0.25em]`}
           >
             <span className={`inline-block h-2 w-2 rounded-full ${a.dot} animate-pulse-glow`} />
             {target.kicker}
@@ -178,12 +178,12 @@ export function CountdownConsole({
         </div>
       )}
 
-      <div className="relative mt-3 flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-3">
-        <span className="text-xs font-medium text-paper/60">{target.whenLabel}</span>
+      <div className="relative mt-3 flex flex-col items-stretch justify-between gap-2 border-t border-white/10 pt-3 min-[420px]:flex-row min-[420px]:items-center sm:gap-3">
+        <span className="text-center text-[0.7rem] font-medium text-paper/60 min-[420px]:text-left sm:text-xs">{target.whenLabel}</span>
         <button
           type="button"
           onClick={handleCalendar}
-          className={`group inline-flex items-center gap-1.5 rounded-full border ${a.border}
+          className={`group inline-flex min-h-10 items-center justify-center gap-1.5 rounded-full border ${a.border}
                       bg-white/5 px-3.5 py-1.5 text-xs font-semibold ${a.text}
                       transition hover:bg-white/10`}
         >

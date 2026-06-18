@@ -5,27 +5,27 @@ export function CoverReveal() {
     <section id="cover" className="relative overflow-hidden border-y border-white/10 bg-paper text-ink">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_12%,rgba(255,46,151,0.24),transparent_34%),radial-gradient(circle_at_88%_68%,rgba(22,224,255,0.22),transparent_36%)]" />
 
-      <div className="relative mx-auto grid max-w-7xl items-center gap-8 px-4 py-16 sm:py-20 lg:grid-cols-[1.05fr_0.95fr] lg:py-24">
+      <div className="relative mx-auto grid max-w-7xl items-center gap-8 px-3 py-14 sm:px-4 sm:py-20 lg:grid-cols-[1.05fr_0.95fr] lg:py-24">
         <div>
-          <p className="mb-3 text-xs font-black uppercase tracking-[0.34em] text-pink sm:text-sm">
+          <p className="mb-3 text-[0.65rem] font-black uppercase tracking-[0.26em] text-pink sm:text-sm sm:tracking-[0.34em]">
             Official cover art
           </p>
-          <h2 className="font-display text-[clamp(2.5rem,8vw,6.5rem)] uppercase leading-[0.82] tracking-normal">
+          <h2 className="font-display text-[clamp(2.3rem,13vw,6.5rem)] uppercase leading-[0.82] tracking-normal sm:text-[clamp(2.5rem,8vw,6.5rem)]">
             The wait has a face now
           </h2>
-          <p className="mt-5 max-w-xl text-balance text-base font-semibold leading-relaxed text-ink/70 sm:text-lg">
+          <p className="mt-4 max-w-xl text-balance text-sm font-semibold leading-relaxed text-ink/70 sm:mt-5 sm:text-lg">
             A full-state collage of speedboats, skyline heat, chrome, trouble, and the
             duo at the center of it all.
           </p>
 
-          <div className="mt-7 flex flex-wrap gap-3">
-            <span className="rounded-full bg-ink px-4 py-2 text-xs font-black uppercase tracking-[0.22em] text-paper">
+          <div className="mt-6 flex flex-wrap gap-2 sm:mt-7 sm:gap-3">
+            <span className="rounded-full bg-ink px-3 py-2 text-[0.68rem] font-black uppercase tracking-[0.16em] text-paper sm:px-4 sm:text-xs sm:tracking-[0.22em]">
               Pre-order June 25
             </span>
-            <span className="rounded-full border border-ink/20 bg-white/70 px-4 py-2 text-xs font-black uppercase tracking-[0.22em] text-ink">
+            <span className="rounded-full border border-ink/20 bg-white/70 px-3 py-2 text-[0.68rem] font-black uppercase tracking-[0.16em] text-ink sm:px-4 sm:text-xs sm:tracking-[0.22em]">
               PS5
             </span>
-            <span className="rounded-full border border-ink/20 bg-white/70 px-4 py-2 text-xs font-black uppercase tracking-[0.22em] text-ink">
+            <span className="rounded-full border border-ink/20 bg-white/70 px-3 py-2 text-[0.68rem] font-black uppercase tracking-[0.16em] text-ink sm:px-4 sm:text-xs sm:tracking-[0.22em]">
               Xbox Series X|S
             </span>
           </div>

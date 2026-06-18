@@ -5,10 +5,13 @@ import { Scenes } from "@/components/Scenes";
 import { CinematicDivider } from "@/components/CinematicDivider";
 import { Cast } from "@/components/Cast";
 import { Footer } from "@/components/Footer";
+import { LeonidaRouteMap } from "@/components/LeonidaRouteMap";
+import { SectionBreak } from "@/components/SectionBreak";
+import { StickyCountdownNav } from "@/components/StickyCountdownNav";
 
 export default function Home() {
   return (
-    <main className="relative">
+    <main id="top" className="relative">
       {/* Skip link for keyboard users */}
       <a
         href="#cover"
@@ -17,10 +20,14 @@ export default function Home() {
       >
         Skip to content
       </a>
+      <StickyCountdownNav />
 
       <Hero />
+      <SectionBreak tone="pink" />
       <Cast />
+      <SectionBreak tone="cyan" />
       <CoverReveal />
+      <LeonidaRouteMap />
 
       <div className="relative">
         <div
@@ -33,6 +40,7 @@ export default function Home() {
         <Postcards />
       </div>
 
+      <SectionBreak tone="sunset" />
       <Scenes />
       <CinematicDivider />
       <Footer />

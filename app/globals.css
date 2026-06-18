@@ -19,6 +19,13 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+img,
+video,
+canvas,
+svg {
+  max-width: 100%;
+}
+
 /* Tabular figures everywhere digits must not jitter. */
 .tabular {
   font-variant-numeric: tabular-nums;
@@ -107,6 +114,29 @@ body {
   animation: hero-sweep 9s ease-in-out infinite;
 }
 
+.hero-neon-grid {
+  background-image:
+    linear-gradient(rgba(255, 46, 151, 0.22) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(22, 224, 255, 0.18) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: linear-gradient(to top, black 0%, transparent 72%);
+  opacity: 0.28;
+  transform: perspective(560px) rotateX(62deg) translateY(18%);
+  transform-origin: bottom;
+}
+
+.hero-depth-back {
+  animation: hero-depth-back 18s ease-in-out infinite alternate;
+}
+
+.hero-depth-mid {
+  animation: hero-depth-mid 12s ease-in-out infinite alternate;
+}
+
+.hero-depth-front {
+  animation: hero-depth-front 10s ease-in-out infinite alternate;
+}
+
 .cast-scan {
   background: repeating-linear-gradient(
     to bottom,
@@ -118,6 +148,42 @@ body {
   mix-blend-mode: overlay;
 }
 
+.section-burn {
+  background:
+    linear-gradient(180deg, rgba(11, 6, 20, 0), rgba(11, 6, 20, 0.82) 44%, rgba(11, 6, 20, 0)),
+    repeating-linear-gradient(90deg, rgba(253, 246, 238, 0.08) 0, rgba(253, 246, 238, 0.08) 1px, transparent 1px, transparent 18px);
+}
+
+.section-burn::before,
+.section-burn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.section-burn::before {
+  background: linear-gradient(105deg, transparent 0%, rgba(255, 255, 255, 0.2) 48%, transparent 56%);
+  mix-blend-mode: screen;
+  animation: burn-sweep 6.5s ease-in-out infinite;
+}
+
+.section-burn::after {
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 4px,
+    rgba(0, 0, 0, 0.28) 5px,
+    transparent 6px
+  );
+  opacity: 0.4;
+}
+
+.route-pulse {
+  stroke-dasharray: 12 88;
+  animation: route-pulse 5.5s ease-in-out infinite;
+}
+
 .travel-grid {
   background-image:
     linear-gradient(rgba(253, 246, 238, 0.25) 1px, transparent 1px),
@@ -126,10 +192,28 @@ body {
   mask-image: radial-gradient(circle at center, black 0%, transparent 72%);
 }
 
+.mobile-snap {
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 0.75rem;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+
+.mobile-snap::-webkit-scrollbar {
+  display: none;
+}
+
 .light-scan {
   background: linear-gradient(105deg, transparent 0%, transparent 42%, rgba(255, 255, 255, 0.3) 50%, transparent 58%, transparent 100%);
   mix-blend-mode: screen;
   transform: translateX(-80%);
+}
+
+@media (min-width: 640px) {
+  [style*="--postcard-tilt"] {
+    transform: rotate(var(--postcard-tilt));
+  }
 }
 
 .signal-flicker {
@@ -184,6 +268,58 @@ body {
   }
 }
 
+@keyframes hero-depth-back {
+  from {
+    transform: scale(1.01) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.035) translate3d(-0.7%, -0.5%, 0);
+  }
+}
+
+@keyframes hero-depth-mid {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(0, -5px, 0);
+  }
+}
+
+@keyframes hero-depth-front {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(0, -8px, 0);
+  }
+}
+
+@keyframes burn-sweep {
+  0%,
+  44% {
+    opacity: 0;
+    transform: translateX(-32%);
+  }
+  54% {
+    opacity: 0.7;
+  }
+  72%,
+  100% {
+    opacity: 0;
+    transform: translateX(32%);
+  }
+}
+
+@keyframes route-pulse {
+  from {
+    stroke-dashoffset: 120;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
 @keyframes scan-card {
   from {
     transform: translateX(-80%);
@@ -227,6 +363,11 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .animate-hero-drift,
   .hero-light-sweep,
+  .hero-depth-back,
+  .hero-depth-mid,
+  .hero-depth-front,
+  .section-burn::before,
+  .route-pulse,
   .light-scan,
   .signal-flicker,
   .signal-acquire {

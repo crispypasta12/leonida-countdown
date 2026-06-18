@@ -5,25 +5,25 @@ export function Scenes() {
   const [feature, ...supporting] = SCENES;
 
   return (
-    <section id="scenes" className="relative overflow-hidden border-y border-white/10 bg-[#090812] px-4 py-20 sm:py-28">
+    <section id="scenes" className="relative overflow-hidden border-y border-white/10 bg-[#090812] px-3 py-16 sm:px-4 sm:py-28">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_8%,rgba(22,224,255,0.13),transparent_34%),radial-gradient(circle_at_84%_88%,rgba(255,46,151,0.14),transparent_36%)]" />
       <div className="absolute inset-0 opacity-[0.06] travel-grid" aria-hidden />
 
       <div className="relative mx-auto max-w-6xl">
-        <header className="mb-10 max-w-3xl">
-          <p className="mb-2 text-xs font-bold uppercase tracking-[0.35em] text-cyan sm:text-sm">
+        <header className="mb-8 max-w-3xl sm:mb-10">
+          <p className="mb-2 text-[0.65rem] font-bold uppercase tracking-[0.28em] text-cyan sm:text-sm sm:tracking-[0.35em]">
             Field reports
           </p>
-          <h2 className="font-display text-[clamp(2rem,7vw,4.8rem)] uppercase leading-none tracking-normal text-paper">
+          <h2 className="font-display text-[clamp(2rem,12vw,4.8rem)] uppercase leading-none tracking-normal text-paper sm:text-[clamp(2rem,7vw,4.8rem)]">
             Scenes from Leonida
           </h2>
-          <p className="mt-4 max-w-2xl text-balance text-paper/65">
+          <p className="mt-3 max-w-2xl text-balance text-sm leading-relaxed text-paper/65 sm:mt-4 sm:text-base">
             The postcards sell the dream. These are the dispatches from the ground.
           </p>
         </header>
 
         <div className="grid gap-4 lg:grid-cols-[1.25fr_0.75fr]">
-          <figure className="group relative min-h-[30rem] overflow-hidden rounded-lg bg-white/[0.04] ring-1 ring-white/10">
+          <figure className="group relative min-h-[24rem] overflow-hidden rounded-lg bg-white/[0.04] ring-1 ring-white/10 sm:min-h-[30rem]">
             <Image
               src={feature.src}
               alt={`${feature.place} - ${feature.title}`}
@@ -40,7 +40,7 @@ export function Scenes() {
               >
                 {feature.place}
               </span>
-              <h3 className="mt-1 font-display text-4xl uppercase leading-none tracking-wide text-paper sm:text-6xl">
+              <h3 className="mt-1 font-display text-3xl uppercase leading-none tracking-wide text-paper sm:text-6xl">
                 {feature.title}
               </h3>
               <p className="mt-3 max-w-lg text-sm leading-relaxed text-paper/78 sm:text-base">
@@ -53,7 +53,7 @@ export function Scenes() {
             {supporting.map((scene) => (
               <figure
                 key={scene.place}
-                className="group relative min-h-[14rem] overflow-hidden rounded-lg bg-white/[0.04] ring-1 ring-white/10"
+                className="group relative min-h-[12.5rem] overflow-hidden rounded-lg bg-white/[0.04] ring-1 ring-white/10 sm:min-h-[14rem]"
               >
                 <Image
                   src={scene.src}

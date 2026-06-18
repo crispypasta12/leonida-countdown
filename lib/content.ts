@@ -67,6 +67,7 @@ export type CastMember = {
   role: string;
   blurb: string;
   accent: string;
+  thumbnailPosition?: string;
   /** One or two Cloudinary clips. Two = cross-fade (the couple). */
   videos: string[];
 };
@@ -124,6 +125,7 @@ export const CAST: CastMember[] = [
     role: "The Couple",
     blurb: "A modern-day Bonnie and Clyde with everything to lose and a state full of reasons to run.",
     accent: "#FF2E97",
+    thumbnailPosition: "50% 32%",
     videos: [
       cldVideo("Jason_Duval_Video_Clip_yiffa2", 1280),
       cldVideo("Lucia_Caminos_Video_Clip_gubblc", 1280),
@@ -135,6 +137,7 @@ export const CAST: CastMember[] = [
     role: "The Mogul",
     blurb: "Built an empire from the ground up. He pours the champagne; somebody else pays the tab.",
     accent: "#FF8A3D",
+    thumbnailPosition: "50% 30%",
     videos: [cldVideo("Boobie_Ike_Video_Clip_xv4rux")],
   },
   {
@@ -143,6 +146,7 @@ export const CAST: CastMember[] = [
     role: "The Operator",
     blurb: "Always on schedule, always on the move. The kind of professional you only meet once.",
     accent: "#16E0FF",
+    thumbnailPosition: "50% 30%",
     videos: [cldVideo("Raul_Bautista_Video_Clip_kr0cpr")],
   },
   {
@@ -151,6 +155,7 @@ export const CAST: CastMember[] = [
     role: "The Duo",
     blurb: "Going viral one clip at a time - and turning clout into cold, hard cash.",
     accent: "#7B3FE4",
+    thumbnailPosition: "50% 34%",
     videos: [cldVideo("Real_Dimez_Video_Clip_fybnym")],
   },
   {
@@ -159,6 +164,7 @@ export const CAST: CastMember[] = [
     role: "The Hustler",
     blurb: "Knows every corner, every connect, every angle. Knowledge is the only currency that matters.",
     accent: "#16E0FF",
+    thumbnailPosition: "50% 32%",
     videos: [cldVideo("DreQuan_Priest_Video_Clip_ezsvur")],
   },
   {
@@ -167,6 +173,7 @@ export const CAST: CastMember[] = [
     role: "The Insider",
     blurb: "Lives behind a wall of screens. If it's online, he's already seen it.",
     accent: "#FF2E97",
+    thumbnailPosition: "50% 31%",
     videos: [cldVideo("Cal_Hampton_Video_Clip_sg0woz")],
   },
   {
@@ -175,6 +182,7 @@ export const CAST: CastMember[] = [
     role: "The Fixer",
     blurb: "Out on the water where the law gets blurry. He keeps the boats - and the deals - afloat.",
     accent: "#FF8A3D",
+    thumbnailPosition: "50% 33%",
     videos: [cldVideo("Brian_Heder_Video_Clip_tzemxp")],
   },
 ];
