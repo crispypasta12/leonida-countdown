@@ -1,0 +1,168 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --grain-opacity: 0.05;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: #0b0614;
+  color: #fdf6ee;
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Tabular figures everywhere digits must not jitter. */
+.tabular {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* Accessible focus ring on all interactive elements. */
+:where(a, button, [tabindex]):focus-visible {
+  outline: 3px solid #16e0ff;
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* ── Animated film grain ──────────────────────────────────────────────────── */
+.grain::before {
+  content: "";
+  position: fixed;
+  inset: -150%;
+  z-index: 60;
+  pointer-events: none;
+  opacity: var(--grain-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain-shift 0.6s steps(4) infinite;
+}
+
+@keyframes grain-shift {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-5%, 3%); }
+  50% { transform: translate(4%, -4%); }
+  75% { transform: translate(-3%, 2%); }
+  100% { transform: translate(2%, -3%); }
+}
+
+/* ── Scanlines ────────────────────────────────────────────────────────────── */
+.scanlines::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 59;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0px,
+    rgba(0, 0, 0, 0) 2px,
+    rgba(0, 0, 0, 0.12) 3px,
+    rgba(0, 0, 0, 0) 4px
+  );
+  mix-blend-mode: overlay;
+  opacity: 0.5;
+}
+
+/* Flip-tile 3D context */
+.flip-perspective {
+  perspective: 320px;
+}
+
+/* Neon text glow used on the wordmark. */
+.text-glow-pink {
+  text-shadow: 0 0 18px rgba(255, 46, 151, 0.5), 0 0 48px rgba(123, 63, 228, 0.4);
+}
+
+/* ── Respect reduced motion ───────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .grain::before {
+    animation: none !important;
+  }
+}
+
+.animate-hero-drift {
+  animation: hero-drift 28s ease-in-out infinite alternate;
+}
+
+.hero-light-sweep {
+  background:
+    linear-gradient(105deg, transparent 0%, transparent 38%, rgba(255, 255, 255, 0.14) 48%, transparent 58%, transparent 100%),
+    linear-gradient(180deg, transparent 0%, rgba(255, 46, 151, 0.08) 100%);
+  mix-blend-mode: screen;
+  animation: hero-sweep 9s ease-in-out infinite;
+}
+
+.travel-grid {
+  background-image:
+    linear-gradient(rgba(253, 246, 238, 0.25) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(253, 246, 238, 0.25) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(circle at center, black 0%, transparent 72%);
+}
+
+.light-scan {
+  background: linear-gradient(105deg, transparent 0%, transparent 42%, rgba(255, 255, 255, 0.3) 50%, transparent 58%, transparent 100%);
+  mix-blend-mode: screen;
+  transform: translateX(-80%);
+}
+
+.group:hover .light-scan {
+  animation: scan-card 1.4s ease-out forwards;
+}
+
+@keyframes hero-drift {
+  0% {
+    transform: scale(1.04) translate3d(0, 0, 0);
+  }
+  100% {
+    transform: scale(1.13) translate3d(-1.5%, -1.2%, 0);
+  }
+}
+
+@keyframes hero-sweep {
+  0%,
+  42% {
+    opacity: 0;
+    transform: translateX(-24%);
+  }
+  55% {
+    opacity: 0.75;
+  }
+  72%,
+  100% {
+    opacity: 0;
+    transform: translateX(24%);
+  }
+}
+
+@keyframes scan-card {
+  from {
+    transform: translateX(-80%);
+  }
+  to {
+    transform: translateX(80%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-hero-drift,
+  .hero-light-sweep,
+  .light-scan {
+    animation: none !important;
+  }
+}
