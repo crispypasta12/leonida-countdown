@@ -56,44 +56,51 @@ export function ShareRow({
       <button
         type="button"
         onClick={handleShare}
-        className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-md bg-gradient-to-r from-pink to-violet
+        className="group/share relative isolate inline-flex min-h-11 w-full overflow-hidden rounded-md bg-gradient-to-r from-pink to-violet
                    px-5 py-2.5 text-sm font-bold uppercase tracking-wide text-white min-[420px]:w-auto
                    shadow-[0_18px_45px_rgba(255,46,151,0.24)] transition hover:brightness-110 active:scale-95"
       >
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
-          <path
-            d="M18 8a3 3 0 10-2.83-4M6 12a3 3 0 100 0m12 4a3 3 0 10-2.83 4M8.6 13.5l6.8 3.5M15.4 7L8.6 10.5"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-        Share the hype
+        <span className="pointer-events-none absolute inset-0 -translate-x-full bg-[linear-gradient(110deg,transparent_0%,rgba(255,255,255,0.28)_46%,transparent_60%)] opacity-0 transition duration-700 group-hover/share:translate-x-full group-hover/share:opacity-100" />
+        <span className="relative inline-flex items-center justify-center gap-2">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
+            <path
+              d="M18 8a3 3 0 10-2.83-4M6 12a3 3 0 100 0m12 4a3 3 0 10-2.83 4M8.6 13.5l6.8 3.5M15.4 7L8.6 10.5"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          Share the hype
+        </span>
       </button>
 
       <button
         type="button"
         onClick={handleCopy}
-        className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-md border border-cyan/35 bg-ink/30
-                   px-4 py-2.5 text-sm font-bold uppercase tracking-[0.08em] text-cyan transition hover:bg-white/10 min-[420px]:w-auto"
+        className="group/copy relative isolate inline-flex min-h-11 w-full overflow-hidden rounded-md border border-cyan/35 bg-ink/30
+                   px-4 py-2.5 text-sm font-bold uppercase tracking-[0.08em] text-cyan shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]
+                   transition hover:border-cyan/60 hover:bg-white/10 min-[420px]:w-auto"
       >
-        {copied ? (
-          <>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
-              <path d="M5 13l4 4L19 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            Copied
-          </>
-        ) : (
-          <>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
-              <rect x="9" y="9" width="13" height="13" rx="2" stroke="currentColor" strokeWidth="2" />
-              <path d="M5 15V5a2 2 0 012-2h10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-            </svg>
-            Copy link
-          </>
-        )}
+        <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan/70 to-transparent opacity-60" />
+        <span className="relative inline-flex items-center justify-center gap-2" aria-live="polite">
+          {copied ? (
+            <>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
+                <path d="M5 13l4 4L19 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              Copied
+            </>
+          ) : (
+            <>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
+                <rect x="9" y="9" width="13" height="13" rx="2" stroke="currentColor" strokeWidth="2" />
+                <path d="M5 15V5a2 2 0 012-2h10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+              </svg>
+              Copy link
+            </>
+          )}
+        </span>
       </button>
     </div>
   );

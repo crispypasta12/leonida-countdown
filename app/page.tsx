@@ -5,6 +5,7 @@ import { Scenes } from "@/components/Scenes";
 import { CinematicDivider } from "@/components/CinematicDivider";
 import { Cast } from "@/components/Cast";
 import { Footer } from "@/components/Footer";
+import { FinalTransmission } from "@/components/FinalTransmission";
 import { LeonidaRouteMap } from "@/components/LeonidaRouteMap";
 import { SectionBreak } from "@/components/SectionBreak";
 import { StickyCountdownNav } from "@/components/StickyCountdownNav";
@@ -43,6 +44,7 @@ export default function Home() {
       <SectionBreak tone="sunset" />
       <Scenes />
       <CinematicDivider />
+      <FinalTransmission />
       <Footer />
     </main>
   );
