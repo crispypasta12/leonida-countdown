@@ -36,11 +36,11 @@ export function FlipDigit({ value }: { value: string }) {
     <span className="flip-perspective relative inline-block">
       <span
         aria-hidden
-        className="tabular relative z-10 grid place-items-center rounded-lg
-                   bg-gradient-to-b from-white/[0.14] to-white/[0.03]
-                   px-[0.15em] py-[0.08em] font-mono font-bold
-                   text-paper ring-1 ring-white/15
-                   shadow-[inset_0_1px_0_rgba(255,255,255,0.25),inset_0_-8px_18px_rgba(0,0,0,0.55)]"
+        className="tabular relative z-10 grid min-w-[0.72em] place-items-center rounded-md
+                   bg-gradient-to-b from-white/[0.13] to-white/[0.025]
+                   px-[0.14em] py-[0.08em] font-mono font-bold
+                   text-paper ring-1 ring-white/[0.16]
+                   shadow-[inset_0_1px_0_rgba(255,255,255,0.22),inset_0_-8px_18px_rgba(0,0,0,0.62),0_12px_26px_rgba(0,0,0,0.24)]"
         style={{ backfaceVisibility: "hidden" }}
       >
         {/* Center seam line of the split-flap */}

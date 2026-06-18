@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --grain-opacity: 0.05;
+  --grain-opacity: 0.032;
 }
 
 html {
@@ -74,7 +74,7 @@ svg {
     rgba(0, 0, 0, 0) 4px
   );
   mix-blend-mode: overlay;
-  opacity: 0.5;
+  opacity: 0.24;
 }
 
 /* Flip-tile 3D context */
@@ -84,7 +84,7 @@ svg {
 
 /* Neon text glow used on the wordmark. */
 .text-glow-pink {
-  text-shadow: 0 0 18px rgba(255, 46, 151, 0.5), 0 0 48px rgba(123, 63, 228, 0.4);
+  text-shadow: 0 0 16px rgba(255, 46, 151, 0.34), 0 0 42px rgba(123, 63, 228, 0.24);
 }
 
 /* ── Respect reduced motion ───────────────────────────────────────────────── */
@@ -108,20 +108,20 @@ svg {
 
 .hero-light-sweep {
   background:
-    linear-gradient(105deg, transparent 0%, transparent 38%, rgba(255, 255, 255, 0.14) 48%, transparent 58%, transparent 100%),
-    linear-gradient(180deg, transparent 0%, rgba(255, 46, 151, 0.08) 100%);
+    linear-gradient(105deg, transparent 0%, transparent 42%, rgba(255, 255, 255, 0.1) 49%, transparent 57%, transparent 100%),
+    linear-gradient(180deg, transparent 0%, rgba(255, 46, 151, 0.045) 100%);
   mix-blend-mode: screen;
-  animation: hero-sweep 9s ease-in-out infinite;
+  animation: hero-sweep 12s ease-in-out infinite;
 }
 
 .hero-neon-grid {
   background-image:
-    linear-gradient(rgba(255, 46, 151, 0.22) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(22, 224, 255, 0.18) 1px, transparent 1px);
-  background-size: 42px 42px;
-  mask-image: linear-gradient(to top, black 0%, transparent 72%);
-  opacity: 0.28;
-  transform: perspective(560px) rotateX(62deg) translateY(18%);
+    linear-gradient(rgba(255, 46, 151, 0.16) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(22, 224, 255, 0.13) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: linear-gradient(to top, black 0%, transparent 68%);
+  opacity: 0.2;
+  transform: perspective(640px) rotateX(62deg) translateY(24%);
   transform-origin: bottom;
 }
 
@@ -245,10 +245,10 @@ svg {
 
 @keyframes hero-drift {
   0% {
-    transform: scale(1.04) translate3d(0, 0, 0);
+    transform: scale(1.025) translate3d(0, 0, 0);
   }
   100% {
-    transform: scale(1.13) translate3d(-1.5%, -1.2%, 0);
+    transform: scale(1.075) translate3d(-0.8%, -0.7%, 0);
   }
 }
 
@@ -259,7 +259,7 @@ svg {
     transform: translateX(-24%);
   }
   55% {
-    opacity: 0.75;
+    opacity: 0.52;
   }
   72%,
   100% {
@@ -270,10 +270,10 @@ svg {
 
 @keyframes hero-depth-back {
   from {
-    transform: scale(1.01) translate3d(0, 0, 0);
+    transform: scale(1.005) translate3d(0, 0, 0);
   }
   to {
-    transform: scale(1.035) translate3d(-0.7%, -0.5%, 0);
+    transform: scale(1.02) translate3d(-0.4%, -0.3%, 0);
   }
 }
 
@@ -282,7 +282,7 @@ svg {
     transform: translate3d(0, 0, 0);
   }
   to {
-    transform: translate3d(0, -5px, 0);
+    transform: translate3d(0, -3px, 0);
   }
 }
 
@@ -291,7 +291,7 @@ svg {
     transform: translate3d(0, 0, 0);
   }
   to {
-    transform: translate3d(0, -8px, 0);
+    transform: translate3d(0, -5px, 0);
   }
 }
 

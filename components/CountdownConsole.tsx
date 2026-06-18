@@ -39,19 +39,19 @@ function DigitGroup({
 }) {
   const digitSize =
     variant === "feature"
-      ? "text-[clamp(1.18rem,5.7vw,3rem)]"
+      ? "text-[clamp(1.2rem,5.4vw,3.35rem)]"
       : variant === "compact"
-        ? "text-[clamp(0.95rem,4.5vw,1.8rem)]"
-        : "text-[clamp(1.3rem,4.6vw,2.15rem)]";
+        ? "text-[clamp(0.95rem,4.1vw,1.9rem)]"
+        : "text-[clamp(1.3rem,4.5vw,2.2rem)]";
 
   return (
-    <div className="flex min-w-0 flex-col items-center gap-1.5">
-      <div className={`flex max-w-full gap-[2px] leading-none ${digitSize}`}>
+    <div className="flex min-w-0 flex-1 flex-col items-center gap-1.5">
+      <div className={`flex max-w-full gap-[3px] leading-none ${digitSize}`}>
         {value.split("").map((d, i) => (
           <FlipDigit key={i} value={d} />
         ))}
       </div>
-      <span className="text-[0.55rem] font-semibold uppercase tracking-[0.16em] text-paper/55 sm:text-xs sm:tracking-[0.2em]">
+      <span className="text-[0.55rem] font-bold uppercase tracking-[0.18em] text-paper/48 sm:text-xs sm:tracking-[0.22em]">
         {label}
       </span>
     </div>
@@ -110,39 +110,43 @@ export function CountdownConsole({
 
   const shell =
     variant === "feature"
-      ? `relative w-full max-w-3xl overflow-hidden rounded-lg border border-white/15
-         bg-ink/50 p-3 shadow-[0_0_70px_rgba(255,46,151,0.28),0_0_90px_rgba(22,224,255,0.14)]
+      ? `relative min-w-0 w-full overflow-hidden rounded-md border border-white/[0.14]
+         bg-[linear-gradient(145deg,rgba(11,6,20,0.9),rgba(31,16,46,0.62))]
+         p-3 shadow-[0_28px_90px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,255,255,0.12)]
          ring-1 ring-white/10 backdrop-blur-2xl sm:p-5`
       : variant === "compact"
-        ? `relative w-full max-w-lg overflow-hidden rounded-lg border ${a.border}
-           bg-white/[0.07] p-3 backdrop-blur-xl ${a.glow} sm:p-5`
-        : `relative w-full max-w-md overflow-hidden rounded-lg border ${a.border}
-           bg-white/[0.06] p-5 backdrop-blur-xl ${a.glow} sm:p-6`;
+        ? `relative min-w-0 w-full overflow-hidden rounded-md border border-white/[0.12]
+           bg-[linear-gradient(150deg,rgba(253,246,238,0.08),rgba(253,246,238,0.025))]
+           p-3 shadow-[0_22px_70px_rgba(0,0,0,0.35),inset_0_1px_0_rgba(255,255,255,0.12)]
+           backdrop-blur-xl sm:p-5`
+        : `relative min-w-0 w-full max-w-md overflow-hidden rounded-md border ${a.border}
+           bg-white/[0.055] p-5 backdrop-blur-xl ${a.glow} sm:p-6`;
 
   const titleSize =
     variant === "feature"
-      ? "text-[1.65rem] sm:text-4xl lg:text-5xl"
-      : "text-xl sm:text-3xl";
+      ? "text-[1.65rem] sm:text-4xl lg:text-[3.25rem]"
+      : "text-xl sm:text-[2rem]";
 
-  const digitGap = variant === "feature" ? "gap-1 sm:gap-2.5" : "gap-0.5 sm:gap-1";
+  const digitGap = variant === "feature" ? "gap-1.5 sm:gap-3" : "gap-1 sm:gap-1.5";
 
   return (
     <div className={shell}>
       <div
-        className="pointer-events-none absolute inset-0 opacity-70"
+        className="pointer-events-none absolute inset-0 opacity-55"
         style={{
           background:
             variant === "feature"
-              ? `radial-gradient(circle at 20% 0%, ${a.hex}45, transparent 34%), radial-gradient(circle at 86% 110%, #FF2E9745, transparent 34%)`
-              : `radial-gradient(circle at 15% 0%, ${a.hex}28, transparent 42%)`,
+              ? `linear-gradient(110deg, rgba(255,255,255,0.1), transparent 28%, transparent 72%, rgba(22,224,255,0.08)), radial-gradient(circle at 16% 0%, ${a.hex}36, transparent 34%)`
+              : `linear-gradient(120deg, rgba(255,255,255,0.08), transparent 36%), radial-gradient(circle at 15% 0%, ${a.hex}22, transparent 42%)`,
         }}
       />
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/50 to-transparent" />
+      <div className="pointer-events-none absolute inset-x-4 bottom-0 h-px bg-gradient-to-r from-transparent via-cyan/30 to-transparent" />
 
-      <div className="relative mb-3 flex items-center justify-between gap-2 sm:mb-4">
+      <div className="relative mb-3 flex items-start justify-between gap-2 sm:mb-4">
         <div className="min-w-0">
           <div
-            className={`flex items-center gap-2 text-[0.58rem] font-bold uppercase tracking-[0.18em] ${a.text} sm:text-[0.65rem] sm:tracking-[0.25em]`}
+            className={`mb-1 flex items-center gap-2 text-[0.58rem] font-black uppercase tracking-[0.18em] ${a.text} sm:text-[0.65rem] sm:tracking-[0.25em]`}
           >
             <span className={`inline-block h-2 w-2 rounded-full ${a.dot} animate-pulse-glow`} />
             {target.kicker}
@@ -167,7 +171,7 @@ export function CountdownConsole({
           <p className="mx-auto mt-2 max-w-xs text-sm text-paper/70">{target.liveBlurb}</p>
         </div>
       ) : (
-        <div className={`relative flex items-start justify-center ${digitGap}`} aria-hidden>
+        <div className={`relative grid grid-cols-2 items-start justify-center ${digitGap} sm:flex`} aria-hidden>
           <DigitGroup value={pad(parts.days, parts.days > 99 ? 3 : 2)} label="Days" variant={variant} />
           <Separator variant={variant} />
           <DigitGroup value={pad(parts.hours)} label="Hrs" variant={variant} />
@@ -178,14 +182,14 @@ export function CountdownConsole({
         </div>
       )}
 
-      <div className="relative mt-3 flex flex-col items-stretch justify-between gap-2 border-t border-white/10 pt-3 min-[420px]:flex-row min-[420px]:items-center sm:gap-3">
-        <span className="text-center text-[0.7rem] font-medium text-paper/60 min-[420px]:text-left sm:text-xs">{target.whenLabel}</span>
+      <div className="relative mt-4 flex flex-col items-stretch justify-between gap-2 border-t border-white/10 pt-3 sm:flex-row sm:items-center sm:gap-3">
+        <span className="text-center text-[0.7rem] font-medium text-paper/60 sm:text-left sm:text-xs">{target.whenLabel}</span>
         <button
           type="button"
           onClick={handleCalendar}
-          className={`group inline-flex min-h-10 items-center justify-center gap-1.5 rounded-full border ${a.border}
-                      bg-white/5 px-3.5 py-1.5 text-xs font-semibold ${a.text}
-                      transition hover:bg-white/10`}
+          className={`group inline-flex min-h-10 w-full items-center justify-center gap-1.5 rounded-md border ${a.border}
+                      bg-ink/30 px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.08em] ${a.text}
+                      transition hover:bg-white/10 sm:w-auto`}
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden>
             <rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" strokeWidth="2" />

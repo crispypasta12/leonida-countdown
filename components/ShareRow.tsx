@@ -5,7 +5,13 @@ import { useEffect, useRef, useState } from "react";
 const SHARE_TEXT =
   "The countdown to Grand Theft Auto VI is on. Pre-orders June 25, launch November 19, 2026. Welcome to Leonida.";
 
-export function ShareRow({ className = "" }: { className?: string }) {
+export function ShareRow({
+  align = "center",
+  className = "",
+}: {
+  align?: "center" | "start";
+  className?: string;
+}) {
   const [copied, setCopied] = useState(false);
   const resetTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -46,13 +52,13 @@ export function ShareRow({ className = "" }: { className?: string }) {
   }
 
   return (
-    <div className={`flex flex-wrap items-center justify-center gap-3 ${className}`}>
+    <div className={`flex flex-wrap items-center gap-3 ${align === "start" ? "justify-start" : "justify-center"} ${className}`}>
       <button
         type="button"
         onClick={handleShare}
-        className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-pink to-violet
+        className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-md bg-gradient-to-r from-pink to-violet
                    px-5 py-2.5 text-sm font-bold uppercase tracking-wide text-white min-[420px]:w-auto
-                   shadow-neon-pink transition hover:brightness-110 active:scale-95"
+                   shadow-[0_18px_45px_rgba(255,46,151,0.24)] transition hover:brightness-110 active:scale-95"
       >
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
           <path
@@ -69,8 +75,8 @@ export function ShareRow({ className = "" }: { className?: string }) {
       <button
         type="button"
         onClick={handleCopy}
-        className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full border border-cyan/40 bg-white/5
-                   px-4 py-2.5 text-sm font-semibold text-cyan transition hover:bg-white/10 min-[420px]:w-auto"
+        className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-md border border-cyan/35 bg-ink/30
+                   px-4 py-2.5 text-sm font-bold uppercase tracking-[0.08em] text-cyan transition hover:bg-white/10 min-[420px]:w-auto"
       >
         {copied ? (
           <>

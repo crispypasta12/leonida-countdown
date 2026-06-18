@@ -7,7 +7,7 @@ export function Hero() {
   const release = TARGETS[1];
 
   return (
-    <section className="relative min-h-[100svh] w-full overflow-hidden sm:min-h-[92svh]">
+    <section className="relative min-h-[100svh] w-full overflow-hidden">
       <div className="absolute inset-0 hero-depth-back">
         <picture className="block h-full w-full">
           <source media="(min-width: 640px)" srcSet="/art/hero/hero-03-land.jpg" />
@@ -15,42 +15,48 @@ export function Hero() {
             src="/art/hero/hero-03-port.jpg"
             alt=""
             fetchPriority="high"
-            className="h-full w-full animate-hero-drift object-cover"
+            className="h-full w-full animate-hero-drift object-cover object-[58%_center] sm:object-center"
           />
         </picture>
       </div>
 
-      <div className="absolute inset-0 bg-gradient-to-b from-ink/80 via-ink/28 to-ink" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_18%,rgba(255,46,151,0.28),transparent_34%),radial-gradient(ellipse_at_18%_70%,rgba(22,224,255,0.18),transparent_38%)]" />
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(11,6,20,0.95)_0%,rgba(11,6,20,0.72)_31%,rgba(11,6,20,0.18)_62%,rgba(11,6,20,0.48)_100%)]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-ink/36 via-transparent to-ink" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_72%_30%,rgba(255,46,151,0.16),transparent_34%),radial-gradient(ellipse_at_18%_78%,rgba(22,224,255,0.14),transparent_36%)]" />
       <div className="hero-light-sweep absolute inset-0" aria-hidden />
-      <div className="hero-neon-grid absolute inset-x-0 bottom-0 h-[46%]" aria-hidden />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ink to-transparent" />
+      <div className="hero-neon-grid absolute inset-x-0 bottom-0 h-[34%]" aria-hidden />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-ink via-ink/82 to-transparent" />
 
-      <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-6xl flex-col items-center justify-center px-3 pb-12 pt-14 text-center sm:min-h-[92svh] sm:px-4 sm:pb-12 sm:pt-16">
-        <p className="hero-depth-mid mb-2 text-[0.64rem] font-bold uppercase tracking-[0.32em] text-cyan sm:mb-3 sm:text-sm sm:tracking-[0.42em]">
-          Welcome to Leonida
-        </p>
+      <div className="relative z-10 mx-auto grid min-h-[100svh] max-w-7xl grid-rows-[1fr_auto] px-4 pb-7 pt-20 sm:px-6 sm:pb-9 sm:pt-24 lg:px-8">
+        <div className="flex items-end pb-6 sm:pb-8 lg:pb-10">
+          <div className="max-w-[42rem] text-left">
+            <p className="hero-depth-mid mb-3 inline-flex border-l-2 border-cyan/80 bg-ink/28 py-1 pl-3 pr-4 text-[0.62rem] font-bold uppercase tracking-[0.28em] text-cyan backdrop-blur-sm sm:text-xs sm:tracking-[0.34em]">
+              Welcome to Leonida
+            </p>
 
-        <h1 className="hero-depth-front font-display text-glow-pink text-[clamp(2.35rem,14vw,5.6rem)] font-normal uppercase leading-[0.82] sm:text-[clamp(2.45rem,8.5vw,5.6rem)]">
-          <span className="bg-gradient-to-b from-paper to-paper/72 bg-clip-text text-transparent">
-            Grand Theft
-          </span>
-          <br />
-          <span className="bg-gradient-to-r from-pink via-sunset to-cyan bg-clip-text text-transparent">
-            Auto VI
-          </span>
-        </h1>
+            <h1 className="hero-depth-front font-display text-glow-pink text-[clamp(3.25rem,15vw,8.8rem)] font-normal uppercase leading-[0.79] sm:text-[clamp(4.2rem,10vw,9.4rem)]">
+              <span className="block bg-gradient-to-b from-paper to-paper/76 bg-clip-text text-transparent">
+                Grand Theft
+              </span>
+              <span className="block bg-gradient-to-r from-pink via-sunset to-cyan bg-clip-text text-transparent">
+                Auto VI
+              </span>
+            </h1>
 
-        <p className="hero-depth-mid mt-3 max-w-2xl text-balance text-sm font-medium text-paper/82 sm:text-lg">
-          The clock is live. Pre-orders are almost here. Leonida is waiting.
-        </p>
-
-        <div className="hero-depth-front mt-4 grid w-full max-w-5xl items-end gap-3 sm:gap-4 lg:grid-cols-[1.28fr_0.72fr]">
-          <CountdownConsole target={release} variant="feature" />
-          <CountdownConsole target={preorder} variant="compact" />
+            <p className="hero-depth-mid mt-4 max-w-xl text-balance text-base font-medium leading-relaxed text-paper/78 sm:text-xl">
+              A live launch board for Vice City, Leonida, and every bad decision
+              between now and release day.
+            </p>
+          </div>
         </div>
 
-        <ShareRow className="hero-depth-mid mt-4 sm:mt-5" />
+        <div className="hero-depth-front min-w-0">
+          <div className="grid min-w-0 w-full grid-cols-1 items-end gap-3 sm:gap-4 lg:grid-cols-[1.34fr_0.66fr]">
+            <CountdownConsole target={release} variant="feature" />
+            <CountdownConsole target={preorder} variant="compact" />
+          </div>
+          <ShareRow align="start" className="hero-depth-mid mt-4 sm:mt-5" />
+        </div>
       </div>
 
       <a
