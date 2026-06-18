@@ -132,7 +132,30 @@ body {
   transform: translateX(-80%);
 }
 
-.group:hover .light-scan {
+.signal-flicker {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.18), transparent 13%, transparent 84%, rgba(255, 255, 255, 0.12)),
+    repeating-linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.1) 0,
+      rgba(255, 255, 255, 0.1) 1px,
+      transparent 1px,
+      transparent 7px
+    );
+  mix-blend-mode: screen;
+  animation: signal-flicker 1.2s steps(3, end) infinite;
+}
+
+.signal-acquire {
+  background: linear-gradient(180deg, transparent 0%, color-mix(in srgb, var(--accent) 78%, transparent) 48%, transparent 56%);
+  mix-blend-mode: screen;
+  transform: translateY(-120%);
+  animation: signal-acquire 2.2s ease-out infinite;
+}
+
+.group:hover .light-scan,
+.group:focus .light-scan,
+.group:focus-visible .light-scan {
   animation: scan-card 1.4s ease-out forwards;
 }
 
@@ -170,10 +193,43 @@ body {
   }
 }
 
+@keyframes signal-flicker {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  22% {
+    filter: brightness(1.45);
+  }
+  36% {
+    filter: brightness(0.72);
+  }
+  62% {
+    filter: brightness(1.18);
+  }
+}
+
+@keyframes signal-acquire {
+  0% {
+    opacity: 0;
+    transform: translateY(-120%);
+  }
+  18% {
+    opacity: 0.72;
+  }
+  54%,
+  100% {
+    opacity: 0;
+    transform: translateY(120%);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-hero-drift,
   .hero-light-sweep,
-  .light-scan {
+  .light-scan,
+  .signal-flicker,
+  .signal-acquire {
     animation: none !important;
   }
 }

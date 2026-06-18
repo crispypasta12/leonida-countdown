@@ -1,6 +1,7 @@
 import { Hero } from "@/components/Hero";
 import { CoverReveal } from "@/components/CoverReveal";
 import { Postcards } from "@/components/Postcards";
+import { Scenes } from "@/components/Scenes";
 import { CinematicDivider } from "@/components/CinematicDivider";
 import { Cast } from "@/components/Cast";
 import { Footer } from "@/components/Footer";
@@ -18,6 +19,7 @@ export default function Home() {
       </a>
 
       <Hero />
+      <Cast />
       <CoverReveal />
 
       <div className="relative">
@@ -31,8 +33,8 @@ export default function Home() {
         <Postcards />
       </div>
 
+      <Scenes />
       <CinematicDivider />
-      <Cast />
       <Footer />
     </main>
   );

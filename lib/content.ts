@@ -71,6 +71,52 @@ export type CastMember = {
   videos: string[];
 };
 
+export type Scene = {
+  src: string;
+  place: string;
+  title: string;
+  caption: string;
+  tone: string;
+};
+
+export const SCENES: Scene[] = [
+  {
+    src: "/art/scenes/vice-city.jpg",
+    place: "Vice City",
+    title: "High-rise heat",
+    caption: "Clean glass, bad ideas, and a skyline built for getting away with it.",
+    tone: "#16E0FF",
+  },
+  {
+    src: "/art/scenes/leonida-keys.jpg",
+    place: "Leonida Keys",
+    title: "Roadside weird",
+    caption: "Tourists, iguanas, and a slow day waiting to become a headline.",
+    tone: "#FF8A3D",
+  },
+  {
+    src: "/art/scenes/grassrivers.jpg",
+    place: "Grassrivers",
+    title: "Wetlands chase",
+    caption: "Airboats, patrol lights, and nowhere dry enough to hide.",
+    tone: "#7B3FE4",
+  },
+  {
+    src: "/art/scenes/mount-kalaga.jpg",
+    place: "Mount Kalaga",
+    title: "Backroad state lines",
+    caption: "Long roads, red clay, and radio silence out past the guardrails.",
+    tone: "#FF2E97",
+  },
+  {
+    src: "/art/scenes/port-gellhorn.jpg",
+    place: "Port Gellhorn",
+    title: "Night shift",
+    caption: "Neon puddles, engine noise, and business done after closing.",
+    tone: "#16E0FF",
+  },
+];
+
 export const CAST: CastMember[] = [
   {
     src: "/art/cast/jason-lucia.jpg",

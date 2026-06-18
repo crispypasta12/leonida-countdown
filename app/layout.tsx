@@ -48,8 +48,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/art/og/cover.jpg",
-        width: 2048,
-        height: 1152,
+        width: 2400,
+        height: 1350,
         alt: "Grand Theft Auto VI official cover art",
       },
     ],

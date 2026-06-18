@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
+import type { CSSProperties, KeyboardEvent, PointerEvent } from "react";
 import type { CastMember } from "@/lib/content";
 
 /**
@@ -12,7 +13,14 @@ import type { CastMember } from "@/lib/content";
  *
  * The couple's tile carries two clips and cross-fades between Jason and Lucia.
  */
-export function CastCard({ member, featured }: { member: CastMember; featured?: boolean }) {
+type CastCardProps = {
+  member: CastMember;
+  featured?: boolean;
+  spotlight?: boolean;
+  onActivate?: () => void;
+};
+
+export function CastCard({ member, featured, spotlight = false, onActivate }: CastCardProps) {
   const rootRef = useRef<HTMLDivElement>(null);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const [near, setNear] = useState(false); // close enough to attach src
@@ -50,10 +58,12 @@ export function CastCard({ member, featured }: { member: CastMember; featured?: 
     return () => io.disconnect();
   }, []);
 
-  // Drive play/pause from `active`.
+  const live = active || spotlight;
+
+  // Drive play/pause from `live`.
   useEffect(() => {
     const vids = videoRefs.current.filter(Boolean) as HTMLVideoElement[];
-    if (active && near) {
+    if (live && near) {
       vids.forEach((v) => {
         const p = v.play();
         if (p && typeof p.catch === "function") p.catch(() => {});
@@ -61,38 +71,88 @@ export function CastCard({ member, featured }: { member: CastMember; featured?: 
     } else {
       vids.forEach((v) => v.pause());
     }
-  }, [active, near]);
+  }, [live, near]);
 
   // Cross-fade the couple's two clips on a gentle interval.
   useEffect(() => {
-    if (!dual || !active) return;
+    if (!dual || !live) return;
     const id = setInterval(() => setFace((f) => (f === 0 ? 1 : 0)), 3600);
     return () => clearInterval(id);
-  }, [dual, active]);
+  }, [dual, live]);
 
   const enter = useCallback(() => {
     if (reducedRef.current || coarseRef.current) return;
+    onActivate?.();
     setNear(true);
     setActive(true);
-  }, []);
+  }, [onActivate]);
   const leave = useCallback(() => {
+    const el = rootRef.current;
+    if (el) {
+      el.style.setProperty("--tilt-x", "0deg");
+      el.style.setProperty("--tilt-y", "0deg");
+      el.style.setProperty("--glow-x", "50%");
+      el.style.setProperty("--glow-y", "50%");
+    }
     if (coarseRef.current) return;
     setActive(false);
   }, []);
+  const move = useCallback((event: PointerEvent<HTMLDivElement>) => {
+    if (reducedRef.current || coarseRef.current) return;
+    const el = rootRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const x = (event.clientX - rect.left) / rect.width;
+    const y = (event.clientY - rect.top) / rect.height;
+    el.style.setProperty("--tilt-x", `${(0.5 - y) * 7}deg`);
+    el.style.setProperty("--tilt-y", `${(x - 0.5) * 9}deg`);
+    el.style.setProperty("--glow-x", `${x * 100}%`);
+    el.style.setProperty("--glow-y", `${y * 100}%`);
+  }, []);
+  const toggle = useCallback(() => {
+    if (reducedRef.current) return;
+    onActivate?.();
+    setNear(true);
+    setActive((value) => (coarseRef.current ? !value : true));
+  }, [onActivate]);
+  const keyToggle = useCallback((event: KeyboardEvent<HTMLDivElement>) => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+    event.preventDefault();
+    if (reducedRef.current) return;
+    onActivate?.();
+    setNear(true);
+    setActive((value) => !value);
+  }, [onActivate]);
+
+  const rootStyle = {
+    "--accent": member.accent,
+    "--tilt-x": "0deg",
+    "--tilt-y": "0deg",
+    "--glow-x": "50%",
+    "--glow-y": "50%",
+  } as CSSProperties;
 
   return (
     <div
       ref={rootRef}
       className="group relative h-full w-full"
+      style={rootStyle}
       onPointerEnter={enter}
+      onPointerMove={move}
       onPointerLeave={leave}
       onFocus={enter}
       onBlur={leave}
+      onClick={toggle}
+      onKeyDown={keyToggle}
       tabIndex={0}
-      role="group"
+      role="button"
+      aria-pressed={live}
       aria-label={`${member.name} — ${member.role}`}
     >
-      <article className="relative h-full min-h-[22rem] overflow-hidden rounded-lg">
+      <article
+        className="relative h-full min-h-[22rem] overflow-hidden rounded-lg transition-transform duration-300 ease-out
+                   [transform:perspective(900px)_rotateX(var(--tilt-x))_rotateY(var(--tilt-y))]"
+      >
         {/* Poster */}
         <Image
           src={member.src}
@@ -103,7 +163,10 @@ export function CastCard({ member, featured }: { member: CastMember; featured?: 
               ? "(max-width: 1024px) 100vw, 50vw"
               : "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
           }
-          className="object-cover transition-transform duration-700 group-hover:scale-110"
+          className="object-cover transition duration-700 group-hover:scale-110 group-focus:scale-110"
+          style={{
+            filter: live ? "saturate(1.16) contrast(1.06)" : "saturate(0.78) contrast(0.96)",
+          }}
         />
 
         {/* Video layer(s) */}
@@ -116,7 +179,7 @@ export function CastCard({ member, featured }: { member: CastMember; featured?: 
               }}
               className="absolute inset-0 h-full w-full object-cover transition-opacity duration-700"
               style={{
-                opacity: ready && active && (!dual || face === idx) ? 1 : 0,
+                opacity: ready && live && (!dual || face === idx) ? 1 : 0,
               }}
               src={url}
               muted
@@ -137,34 +200,52 @@ export function CastCard({ member, featured }: { member: CastMember; featured?: 
         <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/24 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-r from-ink/35 via-transparent to-transparent opacity-80" />
         <div
-          className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+          className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-focus:opacity-100"
+          style={{
+            background:
+              "radial-gradient(circle at var(--glow-x) var(--glow-y), color-mix(in srgb, var(--accent) 42%, transparent), transparent 32%)",
+          }}
+        />
+        <div
+          className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-focus:opacity-100"
           style={{ boxShadow: `inset 0 0 0 2px ${member.accent}, inset 0 -90px 90px -38px ${member.accent}A0` }}
         />
-        <div className="light-scan pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+        <div className="light-scan pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-focus:opacity-100" />
+        <div
+          className="signal-flicker pointer-events-none absolute inset-0 transition-opacity duration-300"
+          style={{ opacity: ready && live ? 0.26 : 0 }}
+        />
+        <div
+          className="signal-acquire pointer-events-none absolute inset-x-0 top-0 h-full transition-opacity duration-300"
+          style={{ opacity: ready && live ? 0.36 : 0 }}
+        />
         {/* Scanline veil only while the clip is playing */}
         <div
           className="cast-scan pointer-events-none absolute inset-0 transition-opacity duration-500"
-          style={{ opacity: ready && active ? 0.5 : 0 }}
+          style={{ opacity: ready && live ? 0.5 : 0 }}
         />
+
+        <div className="pointer-events-none absolute left-3 top-3 z-10 rounded-full border border-white/15 bg-black/45 p-2 backdrop-blur-sm">
+          <span
+            className="block h-2 w-2 rounded-full"
+            style={{
+              backgroundColor: ready && live ? member.accent : "rgba(253,246,238,0.45)",
+              boxShadow: ready && live ? `0 0 14px ${member.accent}` : undefined,
+            }}
+          />
+        </div>
+
+        <div className="pointer-events-none absolute left-3 top-14 z-10 h-14 w-px bg-gradient-to-b from-[var(--accent)] to-transparent opacity-70" />
+        <div className="pointer-events-none absolute right-3 top-14 z-10 h-14 w-px bg-gradient-to-b from-[var(--accent)] to-transparent opacity-70" />
+        <div className="pointer-events-none absolute inset-x-3 bottom-3 z-10 h-px bg-gradient-to-r from-transparent via-[var(--accent)] to-transparent opacity-70" />
 
         {/* REC badge while playing */}
         <div
-          className="pointer-events-none absolute right-3 top-3 flex items-center gap-1.5 rounded-full bg-black/55 px-2.5 py-1 backdrop-blur-sm transition-all duration-300"
-          style={{ opacity: ready && active ? 1 : 0, transform: ready && active ? "translateY(0)" : "translateY(-6px)" }}
+          className="pointer-events-none absolute right-3 top-14 flex items-center gap-1.5 rounded-full bg-black/55 px-2.5 py-1 backdrop-blur-sm transition-all duration-300"
+          style={{ opacity: ready && live ? 1 : 0, transform: ready && live ? "translateY(0)" : "translateY(-6px)" }}
         >
           <span className="inline-block h-2 w-2 rounded-full bg-[#FF2E97] animate-pulse-glow" />
           <span className="font-mono text-[0.6rem] font-bold uppercase tracking-[0.2em] text-paper">Rec</span>
-        </div>
-
-        {/* Play hint (shown when idle on pointer devices) */}
-        <div
-          className="pointer-events-none absolute left-3 top-3 flex items-center gap-1.5 rounded-full border border-white/20 bg-black/40 px-2.5 py-1 opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-0 [@media(hover:hover)]:opacity-100"
-          style={{ opacity: active ? 0 : undefined }}
-        >
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" className="text-paper" aria-hidden>
-            <path d="M8 5v14l11-7z" />
-          </svg>
-          <span className="font-mono text-[0.55rem] font-bold uppercase tracking-[0.18em] text-paper/90">Hover</span>
         </div>
 
         <div className="absolute inset-x-0 bottom-0 p-5">

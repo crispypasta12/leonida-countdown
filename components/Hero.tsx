@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { TARGETS } from "@/lib/countdown";
 import { CountdownConsole } from "./CountdownConsole";
 import { ShareRow } from "./ShareRow";
@@ -10,22 +9,15 @@ export function Hero() {
   return (
     <section className="relative min-h-[92svh] w-full overflow-hidden">
       <div className="absolute inset-0">
-        <Image
-          src="/art/hero/hero-03-port.jpg"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="animate-hero-drift object-cover sm:hidden"
-        />
-        <Image
-          src="/art/hero/hero-03-land.jpg"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="hidden animate-hero-drift object-cover sm:block"
-        />
+        <picture className="block h-full w-full">
+          <source media="(min-width: 640px)" srcSet="/art/hero/hero-03-land.jpg" />
+          <img
+            src="/art/hero/hero-03-port.jpg"
+            alt=""
+            fetchPriority="high"
+            className="h-full w-full animate-hero-drift object-cover"
+          />
+        </picture>
       </div>
 
       <div className="absolute inset-0 bg-gradient-to-b from-ink/80 via-ink/28 to-ink" />
