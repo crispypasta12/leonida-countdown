@@ -68,9 +68,9 @@ export function CastSpotlight({ member, layout = "mobile" }: CastSpotlightProps)
           src={member.src}
           alt={`${member.name} - ${member.role}`}
           fill
-          sizes="100vw"
+          sizes={isDesktop ? "58vw" : "100vw"}
           priority={false}
-          className="object-cover transition duration-500"
+          className="image-grade object-cover transition duration-500"
         />
 
         {!reduced &&
@@ -89,7 +89,7 @@ export function CastSpotlight({ member, layout = "mobile" }: CastSpotlightProps)
               muted
               loop={!dual}
               playsInline
-              preload="auto"
+              preload="metadata"
               aria-hidden
               onCanPlay={() => setReady(true)}
               onLoadedData={() => setReady(true)}
@@ -101,19 +101,19 @@ export function CastSpotlight({ member, layout = "mobile" }: CastSpotlightProps)
             />
           ))}
 
-        <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/20 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-r from-ink/45 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/18 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-ink/42 via-transparent to-transparent" />
         <div
           className="signal-flicker pointer-events-none absolute inset-0 transition-opacity duration-300"
-          style={{ opacity: ready && !reduced ? 0.34 : 0 }}
+          style={{ opacity: ready && !reduced ? 0.2 : 0 }}
         />
         <div
           className="signal-acquire pointer-events-none absolute inset-x-0 top-0 h-full transition-opacity duration-300"
-          style={{ opacity: ready && !reduced ? 0.45 : 0 }}
+          style={{ opacity: ready && !reduced ? 0.24 : 0 }}
         />
         <div
           className="cast-scan pointer-events-none absolute inset-0 transition-opacity duration-500"
-          style={{ opacity: ready && !reduced ? 0.45 : 0 }}
+          style={{ opacity: ready && !reduced ? 0.3 : 0 }}
         />
         <div className="pointer-events-none absolute inset-3 rounded-md ring-1 ring-[var(--accent)]/60" />
 

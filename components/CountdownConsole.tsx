@@ -51,7 +51,7 @@ function DigitGroup({
           <FlipDigit key={i} value={d} />
         ))}
       </div>
-      <span className="text-[0.55rem] font-bold uppercase tracking-[0.18em] text-paper/48 sm:text-xs sm:tracking-[0.22em]">
+      <span className="text-[0.55rem] font-bold uppercase tracking-[0.14em] text-paper/48 sm:text-xs sm:tracking-[0.18em]">
         {label}
       </span>
     </div>
@@ -146,7 +146,7 @@ export function CountdownConsole({
       <div className="relative mb-3 flex items-start justify-between gap-2 sm:mb-4">
         <div className="min-w-0">
           <div
-            className={`mb-1 flex items-center gap-2 text-[0.58rem] font-black uppercase tracking-[0.18em] ${a.text} sm:text-[0.65rem] sm:tracking-[0.25em]`}
+            className={`mb-1 flex items-center gap-2 text-[0.58rem] font-black uppercase tracking-[0.16em] ${a.text} sm:text-[0.65rem] sm:tracking-[0.2em]`}
           >
             <span className={`inline-block h-2 w-2 rounded-full ${a.dot} animate-pulse-glow`} />
             {target.kicker}

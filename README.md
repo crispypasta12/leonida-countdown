@@ -45,6 +45,12 @@ edit the constants to change every timer on the page.
 - Open Graph + Twitter card meta (uses the official cover art as `og:image`).
 - Fully responsive to ~360px, `prefers-reduced-motion` honored, keyboard-accessible.
 
+## Static art pipeline
+
+Run `npm run optimize:images` to regenerate the web-sized art in `public/art`.
+The cast section uses portrait exports for the large spotlight and landscape
+exports in `public/art/cast-landscape` for the smaller cinematic cards.
+
 ## Deploy to Vercel
 
 Import the repo (root directory `web/`) into Vercel — it builds out of the box.

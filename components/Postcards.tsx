@@ -4,13 +4,13 @@ import { POSTCARDS } from "@/lib/content";
 
 export function Postcards() {
   return (
-    <section id="postcards" className="relative overflow-hidden px-3 py-16 sm:px-4 sm:py-28">
-      <div className="absolute inset-0 opacity-[0.08] travel-grid" aria-hidden />
+    <section id="postcards" className="relative overflow-hidden px-3 py-[4.5rem] sm:px-4 sm:py-32">
+      <div className="absolute inset-0 opacity-[0.055] travel-grid" aria-hidden />
 
       <div className="relative mx-auto max-w-6xl">
-        <header className="mb-9 grid gap-4 sm:mb-12 lg:grid-cols-[0.68fr_0.32fr] lg:items-end">
+        <header className="mb-10 grid gap-4 sm:mb-14 lg:grid-cols-[0.68fr_0.32fr] lg:items-end">
           <div>
-            <p className="mb-2 text-[0.65rem] font-bold uppercase tracking-[0.28em] text-sunset sm:text-sm sm:tracking-[0.35em]">
+            <p className="mb-2 text-[0.65rem] font-bold uppercase tracking-[0.18em] text-sunset sm:text-sm sm:tracking-[0.24em]">
               Wish you were here
             </p>
             <h2 className="font-display text-[clamp(2rem,12vw,5rem)] uppercase leading-none tracking-normal text-paper sm:text-[clamp(2rem,7vw,5rem)]">
@@ -22,8 +22,8 @@ export function Postcards() {
             </p>
           </div>
 
-          <div className="hidden border-l-2 border-sunset bg-white/[0.035] px-4 py-3 text-right shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] lg:block">
-            <p className="font-mono text-[0.62rem] font-black uppercase tracking-[0.24em] text-paper/42">
+          <div className="hidden border-l-2 border-sunset bg-white/[0.028] px-4 py-3 text-right shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] lg:block">
+            <p className="font-mono text-[0.62rem] font-black uppercase tracking-[0.18em] text-paper/42">
               Tourist file
             </p>
             <p className="mt-1 font-display text-3xl uppercase leading-none text-paper">
@@ -32,7 +32,7 @@ export function Postcards() {
           </div>
         </header>
 
-        <ul className="mobile-snap -mx-3 flex gap-4 overflow-x-auto px-3 pb-4 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-7 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3">
+        <ul className="mobile-snap -mx-3 flex gap-4 overflow-x-auto px-3 pb-4 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-8 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3">
           {POSTCARDS.map((p, index) => (
             <li
               key={p.name}
@@ -41,13 +41,13 @@ export function Postcards() {
               }`}
             >
               <figure
-                className="relative h-full overflow-hidden rounded-md bg-paper p-2 shadow-2xl ring-1 ring-white/10 transition duration-500 ease-out group-hover:-translate-y-3 group-hover:scale-[1.02]"
+                className="relative h-full overflow-hidden rounded-md bg-paper p-2 shadow-2xl ring-1 ring-white/10 transition duration-500 ease-out group-hover:-translate-y-2 group-hover:scale-[1.012]"
                 style={{
                   "--postcard-tilt": `${p.tilt}deg`,
                   boxShadow: `0 24px 70px -24px ${p.glow}A0`,
                 } as CSSProperties}
               >
-                <span className="absolute left-1/2 top-1 z-20 h-7 w-24 -translate-x-1/2 -rotate-2 bg-white/55 shadow-sm backdrop-blur-sm" />
+                <span className="absolute left-1/2 top-1 z-20 h-5 w-20 -translate-x-1/2 -rotate-2 bg-white/45 shadow-sm backdrop-blur-sm" />
                 <span
                   className="absolute right-4 top-4 z-20 grid h-11 w-11 place-items-center rounded-full border-2 border-dashed text-[0.55rem] font-black uppercase tracking-widest opacity-80"
                   style={{ color: p.glow, borderColor: p.glow }}
@@ -67,7 +67,7 @@ export function Postcards() {
                     alt={`${p.name} postcard - Visit Leonida`}
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    className="image-grade object-cover transition-transform duration-700 group-hover:scale-[1.055]"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-ink/92 via-ink/10 to-transparent" />
                   <div

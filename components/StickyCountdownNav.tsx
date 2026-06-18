@@ -7,6 +7,7 @@ import { useCountdown } from "@/lib/useCountdown";
 const NAV_LINKS = [
   { href: "#cast", label: "Cast" },
   { href: "#cover", label: "Cover" },
+  { href: "#route-map", label: "Route" },
   { href: "#postcards", label: "Locations" },
   { href: "#scenes", label: "Scenes" },
 ] as const;
@@ -24,7 +25,7 @@ function MiniTarget({ target }: { target: CountdownTarget }) {
   return (
     <a
       href={target.key === "release" ? "#top" : "#cover"}
-      className="group inline-flex min-h-9 items-center gap-2 whitespace-nowrap rounded-md border border-white/[0.14] bg-white/[0.045] px-3 text-[0.65rem] font-black uppercase tracking-[0.14em] text-paper/78 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] transition hover:border-white/25 hover:bg-white/[0.075] focus-visible:bg-white/10 sm:text-xs"
+      className="group inline-flex min-h-9 items-center gap-2 whitespace-nowrap rounded-md border border-white/[0.14] bg-white/[0.045] px-3 text-[0.65rem] font-black uppercase tracking-[0.1em] text-paper/78 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] transition hover:border-white/25 hover:bg-white/[0.075] focus-visible:bg-white/10 sm:text-xs"
       aria-label={`${target.title}: ${value}`}
     >
       <span className={`h-2 w-2 rounded-full ${dot} animate-pulse-glow`} />
@@ -74,7 +75,7 @@ export function StickyCountdownNav() {
         <a
           href="#top"
           aria-current={activeHref === "#top" ? "page" : undefined}
-          className={`hidden min-h-9 whitespace-nowrap rounded-sm border-l-2 px-2.5 py-2 text-[0.68rem] font-black uppercase tracking-[0.18em] transition sm:inline-flex ${
+          className={`hidden min-h-9 whitespace-nowrap rounded-sm border-l-2 px-2.5 py-2 text-[0.68rem] font-black uppercase tracking-[0.12em] transition sm:inline-flex ${
             activeHref === "#top"
               ? "border-pink bg-white/[0.08] text-paper"
               : "border-white/20 text-paper/50 hover:bg-white/[0.06] hover:text-paper"
@@ -96,7 +97,7 @@ export function StickyCountdownNav() {
                 key={link.href}
                 href={link.href}
                 aria-current={active ? "page" : undefined}
-                className={`min-h-9 whitespace-nowrap rounded-sm border-l-2 px-2.5 py-2 text-[0.68rem] font-black uppercase tracking-[0.14em] transition focus-visible:bg-white/10 focus-visible:text-paper sm:text-xs ${
+                className={`min-h-9 whitespace-nowrap rounded-sm border-l-2 px-2.5 py-2 text-[0.68rem] font-black uppercase tracking-[0.1em] transition focus-visible:bg-white/10 focus-visible:text-paper sm:text-xs ${
                   active
                     ? "border-cyan bg-white/[0.08] text-paper shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]"
                     : "border-transparent text-paper/54 hover:border-white/20 hover:bg-white/[0.055] hover:text-paper"

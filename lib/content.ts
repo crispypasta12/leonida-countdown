@@ -63,6 +63,7 @@ export function cldVideo(publicId: string, width = 720): string {
 
 export type CastMember = {
   src: string;
+  landscapeSrc: string;
   name: string;
   role: string;
   blurb: string;
@@ -121,6 +122,7 @@ export const SCENES: Scene[] = [
 export const CAST: CastMember[] = [
   {
     src: "/art/cast/jason-lucia.jpg",
+    landscapeSrc: "/art/cast-landscape/jason-lucia.jpg",
     name: "Jason & Lucia",
     role: "The Couple",
     blurb: "A modern-day Bonnie and Clyde with everything to lose and a state full of reasons to run.",
@@ -133,6 +135,7 @@ export const CAST: CastMember[] = [
   },
   {
     src: "/art/cast/boobie-ike.jpg",
+    landscapeSrc: "/art/cast-landscape/boobie-ike.jpg",
     name: "Boobie Ike",
     role: "The Mogul",
     blurb: "Built an empire from the ground up. He pours the champagne; somebody else pays the tab.",
@@ -142,6 +145,7 @@ export const CAST: CastMember[] = [
   },
   {
     src: "/art/cast/raul-bautista.jpg",
+    landscapeSrc: "/art/cast-landscape/raul-bautista.jpg",
     name: "Raul Bautista",
     role: "The Operator",
     blurb: "Always on schedule, always on the move. The kind of professional you only meet once.",
@@ -151,6 +155,7 @@ export const CAST: CastMember[] = [
   },
   {
     src: "/art/cast/real-dimez.jpg",
+    landscapeSrc: "/art/cast-landscape/real-dimez.jpg",
     name: "Real Dimez",
     role: "The Duo",
     blurb: "Going viral one clip at a time - and turning clout into cold, hard cash.",
@@ -160,6 +165,7 @@ export const CAST: CastMember[] = [
   },
   {
     src: "/art/cast/drequan-priest.jpg",
+    landscapeSrc: "/art/cast-landscape/drequan-priest.jpg",
     name: "DreQuan Priest",
     role: "The Hustler",
     blurb: "Knows every corner, every connect, every angle. Knowledge is the only currency that matters.",
@@ -169,6 +175,7 @@ export const CAST: CastMember[] = [
   },
   {
     src: "/art/cast/cal-hampton.jpg",
+    landscapeSrc: "/art/cast-landscape/cal-hampton.jpg",
     name: "Cal Hampton",
     role: "The Insider",
     blurb: "Lives behind a wall of screens. If it's online, he's already seen it.",
@@ -178,6 +185,7 @@ export const CAST: CastMember[] = [
   },
   {
     src: "/art/cast/brian-heder.jpg",
+    landscapeSrc: "/art/cast-landscape/brian-heder.jpg",
     name: "Brian Heder",
     role: "The Fixer",
     blurb: "Out on the water where the law gets blurry. He keeps the boats - and the deals - afloat.",

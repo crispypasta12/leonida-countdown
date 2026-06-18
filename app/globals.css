@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --grain-opacity: 0.032;
+  --grain-opacity: 0.018;
 }
 
 html {
@@ -48,7 +48,7 @@ svg {
   pointer-events: none;
   opacity: var(--grain-opacity);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  animation: grain-shift 0.6s steps(4) infinite;
+  animation: grain-shift 1.2s steps(4) infinite;
 }
 
 @keyframes grain-shift {
@@ -74,7 +74,7 @@ svg {
     rgba(0, 0, 0, 0) 4px
   );
   mix-blend-mode: overlay;
-  opacity: 0.24;
+  opacity: 0.13;
 }
 
 /* Flip-tile 3D context */
@@ -84,7 +84,7 @@ svg {
 
 /* Neon text glow used on the wordmark. */
 .text-glow-pink {
-  text-shadow: 0 0 16px rgba(255, 46, 151, 0.34), 0 0 42px rgba(123, 63, 228, 0.24);
+  text-shadow: 0 0 14px rgba(255, 46, 151, 0.28), 0 0 36px rgba(123, 63, 228, 0.18);
 }
 
 /* ── Respect reduced motion ───────────────────────────────────────────────── */
@@ -103,7 +103,7 @@ svg {
 }
 
 .animate-hero-drift {
-  animation: hero-drift 28s ease-in-out infinite alternate;
+  animation: hero-drift 38s ease-in-out infinite alternate;
 }
 
 .hero-light-sweep {
@@ -111,7 +111,7 @@ svg {
     linear-gradient(105deg, transparent 0%, transparent 42%, rgba(255, 255, 255, 0.1) 49%, transparent 57%, transparent 100%),
     linear-gradient(180deg, transparent 0%, rgba(255, 46, 151, 0.045) 100%);
   mix-blend-mode: screen;
-  animation: hero-sweep 12s ease-in-out infinite;
+  animation: hero-sweep 18s ease-in-out infinite;
 }
 
 .hero-neon-grid {
@@ -120,21 +120,21 @@ svg {
     linear-gradient(90deg, rgba(22, 224, 255, 0.13) 1px, transparent 1px);
   background-size: 56px 56px;
   mask-image: linear-gradient(to top, black 0%, transparent 68%);
-  opacity: 0.2;
+  opacity: 0.12;
   transform: perspective(640px) rotateX(62deg) translateY(24%);
   transform-origin: bottom;
 }
 
 .hero-depth-back {
-  animation: hero-depth-back 18s ease-in-out infinite alternate;
+  animation: hero-depth-back 26s ease-in-out infinite alternate;
 }
 
 .hero-depth-mid {
-  animation: hero-depth-mid 12s ease-in-out infinite alternate;
+  animation: hero-depth-mid 18s ease-in-out infinite alternate;
 }
 
 .hero-depth-front {
-  animation: hero-depth-front 10s ease-in-out infinite alternate;
+  animation: hero-depth-front 16s ease-in-out infinite alternate;
 }
 
 .cast-scan {
@@ -146,6 +146,36 @@ svg {
     rgba(0, 0, 0, 0) 4px
   );
   mix-blend-mode: overlay;
+}
+
+.image-grade {
+  filter: saturate(0.98) contrast(1.03) brightness(0.96);
+}
+
+.image-grade-warm {
+  filter: saturate(0.98) contrast(1.02) brightness(0.98);
+}
+
+.image-grade-cool {
+  filter: saturate(0.94) contrast(1.04) brightness(0.95);
+}
+
+.reveal-on-view {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal-on-view.can-reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 760ms ease,
+    transform 760ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.reveal-on-view.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .section-burn {
@@ -227,14 +257,14 @@ svg {
       transparent 7px
     );
   mix-blend-mode: screen;
-  animation: signal-flicker 1.2s steps(3, end) infinite;
+  animation: signal-flicker 2.4s steps(3, end) infinite;
 }
 
 .signal-acquire {
   background: linear-gradient(180deg, transparent 0%, color-mix(in srgb, var(--accent) 78%, transparent) 48%, transparent 56%);
   mix-blend-mode: screen;
   transform: translateY(-120%);
-  animation: signal-acquire 2.2s ease-out infinite;
+  animation: signal-acquire 3.8s ease-out infinite;
 }
 
 .group:hover .light-scan,
@@ -372,5 +402,11 @@ svg {
   .signal-flicker,
   .signal-acquire {
     animation: none !important;
+  }
+
+  .reveal-on-view {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
 }

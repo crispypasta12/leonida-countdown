@@ -92,6 +92,48 @@ ASSETS: tuple[Asset, ...] = (
         82,
     ),
     Asset(
+        "downloads/GTAVI_Artwork_Wallpapers/Jason_Lucia_Motel/Jason_and_Lucia_Motel_landscape.jpg",
+        "public/art/cast-landscape/jason-lucia.jpg",
+        2048,
+        82,
+    ),
+    Asset(
+        "downloads/GTAVI_Artwork_Wallpapers/Boobie_Ike/Boobie_Ike_landscape.jpg",
+        "public/art/cast-landscape/boobie-ike.jpg",
+        2048,
+        82,
+    ),
+    Asset(
+        "downloads/GTAVI_Artwork_Wallpapers/Raul_Bautista/Raul_Bautista_landscape.jpg",
+        "public/art/cast-landscape/raul-bautista.jpg",
+        2048,
+        82,
+    ),
+    Asset(
+        "downloads/GTAVI_Artwork_Wallpapers/Real_Dimez/Real_Dimez_landscape.jpg",
+        "public/art/cast-landscape/real-dimez.jpg",
+        2048,
+        82,
+    ),
+    Asset(
+        "downloads/GTAVI_Artwork_Wallpapers/DreQuan_Priest/DreQuan_Priest_landscape.jpg",
+        "public/art/cast-landscape/drequan-priest.jpg",
+        2048,
+        82,
+    ),
+    Asset(
+        "downloads/GTAVI_Artwork_Wallpapers/Cal_Hampton/Cal_Hampton_landscape.jpg",
+        "public/art/cast-landscape/cal-hampton.jpg",
+        2048,
+        82,
+    ),
+    Asset(
+        "downloads/GTAVI_Artwork_Wallpapers/Brian_Heder/Brian_Heder_landscape.jpg",
+        "public/art/cast-landscape/brian-heder.jpg",
+        2048,
+        82,
+    ),
+    Asset(
         "downloads/GTAVI_Artwork_Wallpapers/Postcards/Vice_City/Vice_City_Postcard_landscape.jpg",
         "public/art/postcards/vice-city.jpg",
         2048,

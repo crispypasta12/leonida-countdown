@@ -9,6 +9,7 @@ import { FinalTransmission } from "@/components/FinalTransmission";
 import { LeonidaRouteMap } from "@/components/LeonidaRouteMap";
 import { SectionBreak } from "@/components/SectionBreak";
 import { StickyCountdownNav } from "@/components/StickyCountdownNav";
+import { RevealOnView } from "@/components/RevealOnView";
 
 export default function Home() {
   return (
@@ -25,26 +26,40 @@ export default function Home() {
 
       <Hero />
       <SectionBreak tone="pink" />
-      <Cast />
+      <RevealOnView>
+        <Cast />
+      </RevealOnView>
       <SectionBreak tone="cyan" />
-      <CoverReveal />
-      <LeonidaRouteMap />
+      <RevealOnView>
+        <CoverReveal />
+      </RevealOnView>
+      <RevealOnView>
+        <LeonidaRouteMap />
+      </RevealOnView>
 
       <div className="relative">
         <div
           className="pointer-events-none absolute inset-x-0 -top-32 h-64"
           style={{
             background:
-              "radial-gradient(ellipse 60% 100% at 50% 0%, rgba(123,63,228,0.25), transparent 70%)",
+            "radial-gradient(ellipse 60% 100% at 50% 0%, rgba(123,63,228,0.25), transparent 70%)",
           }}
         />
-        <Postcards />
+        <RevealOnView>
+          <Postcards />
+        </RevealOnView>
       </div>
 
       <SectionBreak tone="sunset" />
-      <Scenes />
-      <CinematicDivider />
-      <FinalTransmission />
+      <RevealOnView>
+        <Scenes />
+      </RevealOnView>
+      <RevealOnView>
+        <CinematicDivider />
+      </RevealOnView>
+      <RevealOnView>
+        <FinalTransmission />
+      </RevealOnView>
       <Footer />
     </main>
   );

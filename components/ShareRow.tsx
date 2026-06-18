@@ -57,7 +57,7 @@ export function ShareRow({
         type="button"
         onClick={handleShare}
         className="group/share relative isolate inline-flex min-h-11 w-full overflow-hidden rounded-md bg-gradient-to-r from-pink to-violet
-                   px-5 py-2.5 text-sm font-bold uppercase tracking-wide text-white min-[420px]:w-auto
+                   px-5 py-2.5 text-sm font-bold uppercase tracking-[0.04em] text-white min-[420px]:w-auto
                    shadow-[0_18px_45px_rgba(255,46,151,0.24)] transition hover:brightness-110 active:scale-95"
       >
         <span className="pointer-events-none absolute inset-0 -translate-x-full bg-[linear-gradient(110deg,transparent_0%,rgba(255,255,255,0.28)_46%,transparent_60%)] opacity-0 transition duration-700 group-hover/share:translate-x-full group-hover/share:opacity-100" />
@@ -79,7 +79,7 @@ export function ShareRow({
         type="button"
         onClick={handleCopy}
         className="group/copy relative isolate inline-flex min-h-11 w-full overflow-hidden rounded-md border border-cyan/35 bg-ink/30
-                   px-4 py-2.5 text-sm font-bold uppercase tracking-[0.08em] text-cyan shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]
+                   px-4 py-2.5 text-sm font-bold uppercase tracking-[0.06em] text-cyan shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]
                    transition hover:border-cyan/60 hover:bg-white/10 min-[420px]:w-auto"
       >
         <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan/70 to-transparent opacity-60" />

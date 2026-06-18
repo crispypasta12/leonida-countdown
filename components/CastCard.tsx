@@ -139,7 +139,7 @@ export function CastCard({ member, featured, compact = false, spotlight = false,
   return (
     <div
       ref={rootRef}
-      className="group relative h-full w-full"
+      className={`group relative w-full ${compact ? "" : "h-full"}`}
       style={rootStyle}
       onPointerEnter={enter}
       onPointerMove={move}
@@ -154,27 +154,27 @@ export function CastCard({ member, featured, compact = false, spotlight = false,
       aria-label={`${member.name} — ${member.role}`}
     >
       <article
-        className={`relative h-full overflow-hidden rounded-lg transition-transform duration-300 ease-out ${
-          compact ? "aspect-[3/4] min-h-0" : "min-h-[14.5rem] sm:min-h-[22rem]"
-        }
+        className={`relative overflow-hidden rounded-lg transition-transform duration-300 ease-out ${
+          compact ? "aspect-[16/9] min-h-0" : "min-h-[14.5rem] sm:min-h-[22rem]"
+        } ${compact ? "" : "h-full"}
                    [transform:perspective(900px)_rotateX(var(--tilt-x))_rotateY(var(--tilt-y))]`}
       >
         {/* Poster */}
         <Image
-          src={member.src}
+          src={compact ? member.landscapeSrc : member.src}
           alt={`${member.name} - ${member.role}`}
           fill
           sizes={
             compact
-              ? "(max-width: 1024px) 42vw, 12vw"
+              ? "(max-width: 1024px) 100vw, 28vw"
               : featured
               ? "(max-width: 1024px) 100vw, 50vw"
               : "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
           }
-          className={`${compact ? "object-cover" : "object-cover group-hover:scale-110 group-focus:scale-110"} transition duration-700`}
+          className={`${compact ? "image-grade object-cover group-hover:scale-[1.035] group-focus:scale-[1.035]" : "object-cover group-hover:scale-110 group-focus:scale-110"} transition duration-700`}
           style={{
             filter: live ? "saturate(1.16) contrast(1.06)" : "saturate(0.9) contrast(0.98)",
-            objectPosition: compact ? member.thumbnailPosition ?? "50% 32%" : undefined,
+            objectPosition: compact ? "50% 50%" : undefined,
           }}
         />
 
@@ -207,8 +207,8 @@ export function CastCard({ member, featured, compact = false, spotlight = false,
           ))}
 
         {/* Legibility + accent treatments */}
-        <div className={`absolute inset-0 bg-gradient-to-t ${compact ? "from-ink/50 via-transparent to-ink/8" : "from-ink via-ink/24 to-transparent"}`} />
-        <div className="absolute inset-0 bg-gradient-to-r from-ink/35 via-transparent to-transparent opacity-80" />
+        <div className={`absolute inset-0 bg-gradient-to-t ${compact ? "from-ink/72 via-ink/12 to-transparent" : "from-ink via-ink/24 to-transparent"}`} />
+        <div className={`absolute inset-0 bg-gradient-to-r ${compact ? "from-ink/48 via-transparent to-ink/12" : "from-ink/35 via-transparent to-transparent"} opacity-80`} />
         <div
           className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-focus:opacity-100"
           style={{
@@ -253,9 +253,12 @@ export function CastCard({ member, featured, compact = false, spotlight = false,
         ) : null}
 
         {compact ? (
-          <div className="pointer-events-none absolute bottom-3 left-3 z-10 max-w-[calc(100%-1.5rem)] rounded-sm border border-white/[0.14] border-l-[3px] border-l-[var(--accent)] bg-black/62 px-2.5 py-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-sm">
-            <span className="block truncate font-mono text-[0.58rem] font-bold uppercase tracking-[0.16em] text-paper">
+          <div className="pointer-events-none absolute inset-x-3 bottom-3 z-10 max-w-[calc(100%-1.5rem)] border-l-[3px] border-l-[var(--accent)] bg-black/42 px-3 py-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-sm">
+            <span className="block truncate font-display text-2xl uppercase leading-none tracking-wide text-paper">
               {member.name}
+            </span>
+            <span className="mt-1 block truncate text-[0.58rem] font-bold uppercase tracking-[0.12em] text-paper/62">
+              {member.role}
             </span>
           </div>
         ) : null}

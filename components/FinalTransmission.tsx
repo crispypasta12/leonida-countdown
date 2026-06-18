@@ -21,15 +21,15 @@ export function FinalTransmission() {
         alt=""
         fill
         sizes="100vw"
-        className="object-cover opacity-30"
+        className="image-grade-cool object-cover opacity-[0.26]"
       />
       <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(11,6,20,0.96)_0%,rgba(11,6,20,0.82)_46%,rgba(11,6,20,0.56)_100%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_22%,rgba(255,46,151,0.2),transparent_34%),radial-gradient(circle_at_82%_74%,rgba(22,224,255,0.17),transparent_36%)]" />
-      <div className="absolute inset-0 opacity-[0.08] travel-grid" aria-hidden />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_22%,rgba(255,46,151,0.14),transparent_34%),radial-gradient(circle_at_82%_74%,rgba(22,224,255,0.12),transparent_36%)]" />
+      <div className="absolute inset-0 opacity-[0.045] travel-grid" aria-hidden />
 
       <div className="relative mx-auto grid max-w-6xl gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-end">
         <div>
-          <p className="mb-3 border-l-2 border-pink pl-3 text-[0.65rem] font-black uppercase tracking-[0.28em] text-pink sm:text-sm sm:tracking-[0.36em]">
+          <p className="mb-3 border-l-2 border-pink pl-3 text-[0.65rem] font-black uppercase tracking-[0.18em] text-pink sm:text-sm sm:tracking-[0.24em]">
             Final transmission
           </p>
           <h2 className="max-w-[40rem] font-display text-[clamp(2.6rem,12vw,4.8rem)] uppercase leading-[0.9] tracking-normal text-paper sm:text-[clamp(3.4rem,5.4vw,4.8rem)]">
