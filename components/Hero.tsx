@@ -41,7 +41,7 @@ export function Hero() {
               aria-label="Grand Theft Auto VI"
             >
               <span
-                className="absolute inset-x-[8%] bottom-[3%] -z-10 h-[28%] rounded-full bg-pink/28 blur-2xl"
+                className="hero-logo-aura absolute inset-x-[8%] bottom-[3%] -z-10 h-[28%] rounded-full bg-pink/28 blur-2xl"
                 aria-hidden
               />
               <span
@@ -55,11 +55,11 @@ export function Hero() {
                 height={612}
                 priority
                 sizes="(max-width: 640px) 78vw, (max-width: 1024px) 58vw, 34rem"
-                className="relative h-auto w-full drop-shadow-[0_24px_54px_rgba(0,0,0,0.48)]"
+                className="hero-logo-image relative h-auto w-full drop-shadow-[0_24px_54px_rgba(0,0,0,0.48)]"
                 draggable={false}
               />
               <span
-                className="pointer-events-none absolute inset-0 rounded-[2rem] bg-[linear-gradient(115deg,transparent_0%,transparent_42%,rgba(255,255,255,0.2)_48%,transparent_55%,transparent_100%)] opacity-25 mix-blend-screen"
+                className="hero-logo-sheen pointer-events-none absolute inset-0 rounded-[2rem] bg-[linear-gradient(115deg,transparent_0%,transparent_42%,rgba(255,255,255,0.2)_48%,transparent_55%,transparent_100%)] opacity-25 mix-blend-screen"
                 aria-hidden
               />
             </h1>
