@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Anton, Outfit, JetBrains_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const display = Anton({
@@ -72,7 +73,10 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${display.variable} ${body.variable} ${mono.variable}`}>
-      <body className="grain scanlines font-body antialiased">{children}</body>
+      <body className="grain scanlines font-body antialiased">
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
