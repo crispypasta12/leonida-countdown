@@ -31,17 +31,31 @@ export function Cast() {
       <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-ink/70 to-transparent" />
 
       <div className="relative mx-auto max-w-6xl">
-        <header className="mb-7 text-center sm:mb-10">
-          <p className="mb-2 text-[0.65rem] font-bold uppercase tracking-[0.28em] text-cyan sm:text-sm sm:tracking-[0.35em]">
-            Live character feeds
-          </p>
-          <h2 className="font-display text-[clamp(2rem,13vw,4.6rem)] uppercase leading-none tracking-normal text-paper sm:text-[clamp(2rem,7vw,4.6rem)]">
-            The Cast
-          </h2>
-          <p className="mx-auto mt-3 max-w-xl text-balance text-sm leading-relaxed text-paper/65 sm:mt-4 sm:text-base">
-            Lovers, hustlers, moguls and operators. Everyone in Leonida is chasing
-            something - and most of them won't stop to ask why.
-          </p>
+        <header className="mb-7 grid gap-4 sm:mb-10 lg:grid-cols-[0.72fr_0.28fr] lg:items-end">
+          <div>
+            <p className="mb-2 text-[0.65rem] font-bold uppercase tracking-[0.28em] text-cyan sm:text-sm sm:tracking-[0.35em]">
+              Live character feeds
+            </p>
+            <h2 className="font-display text-[clamp(2rem,13vw,5.2rem)] uppercase leading-none tracking-normal text-paper sm:text-[clamp(2rem,7vw,5.2rem)]">
+              The Cast
+            </h2>
+            <p className="mt-3 max-w-2xl text-balance text-sm leading-relaxed text-paper/65 sm:mt-4 sm:text-base">
+              Lovers, hustlers, moguls and operators. Everyone in Leonida is chasing
+              something - and most of them won't stop to ask why.
+            </p>
+          </div>
+
+          <div className="hidden border-l-2 border-[var(--cast-accent)] bg-white/[0.035] px-4 py-3 text-right shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] lg:block">
+            <p className="font-mono text-[0.62rem] font-black uppercase tracking-[0.24em] text-paper/42">
+              Active feed
+            </p>
+            <p className="mt-1 font-display text-3xl uppercase leading-none text-paper">
+              {activeMember.name}
+            </p>
+            <p className="mt-1 text-xs font-bold uppercase tracking-[0.16em] text-paper/48">
+              {activeMember.role}
+            </p>
+          </div>
         </header>
 
         <CastSpotlight member={activeMember} />

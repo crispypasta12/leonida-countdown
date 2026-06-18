@@ -8,24 +8,40 @@ export function Postcards() {
       <div className="absolute inset-0 opacity-[0.08] travel-grid" aria-hidden />
 
       <div className="relative mx-auto max-w-6xl">
-        <header className="mb-9 text-center sm:mb-12">
-          <p className="mb-2 text-[0.65rem] font-bold uppercase tracking-[0.28em] text-sunset sm:text-sm sm:tracking-[0.35em]">
-            Wish you were here
-          </p>
-          <h2 className="font-display text-[clamp(2rem,12vw,4.6rem)] uppercase leading-none tracking-normal text-paper sm:text-[clamp(2rem,7vw,4.6rem)]">
-            Postcards from the Sunshine State
-          </h2>
-          <p className="mx-auto mt-3 max-w-xl text-balance text-sm leading-relaxed text-paper/65 sm:mt-4 sm:text-base">
-            Six stops across the state of Leonida. Pack light, leave fast, and don't
-            forget to wave at the cameras.
-          </p>
+        <header className="mb-9 grid gap-4 sm:mb-12 lg:grid-cols-[0.68fr_0.32fr] lg:items-end">
+          <div>
+            <p className="mb-2 text-[0.65rem] font-bold uppercase tracking-[0.28em] text-sunset sm:text-sm sm:tracking-[0.35em]">
+              Wish you were here
+            </p>
+            <h2 className="font-display text-[clamp(2rem,12vw,5rem)] uppercase leading-none tracking-normal text-paper sm:text-[clamp(2rem,7vw,5rem)]">
+              Postcards from the Sunshine State
+            </h2>
+            <p className="mt-3 max-w-2xl text-balance text-sm leading-relaxed text-paper/65 sm:mt-4 sm:text-base">
+              Six stops across the state of Leonida. Pack light, leave fast, and don't
+              forget to wave at the cameras.
+            </p>
+          </div>
+
+          <div className="hidden border-l-2 border-sunset bg-white/[0.035] px-4 py-3 text-right shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] lg:block">
+            <p className="font-mono text-[0.62rem] font-black uppercase tracking-[0.24em] text-paper/42">
+              Tourist file
+            </p>
+            <p className="mt-1 font-display text-3xl uppercase leading-none text-paper">
+              06 stops
+            </p>
+          </div>
         </header>
 
         <ul className="mobile-snap -mx-3 flex gap-4 overflow-x-auto px-3 pb-4 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-7 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3">
-          {POSTCARDS.map((p) => (
-            <li key={p.name} className="group min-w-[82vw] snap-center [perspective:1000px] min-[420px]:min-w-[72vw] sm:min-w-0">
+          {POSTCARDS.map((p, index) => (
+            <li
+              key={p.name}
+              className={`group min-w-[82vw] snap-center [perspective:1000px] min-[420px]:min-w-[72vw] sm:min-w-0 ${
+                index === 0 ? "lg:col-span-2 lg:row-span-2" : ""
+              }`}
+            >
               <figure
-                className="relative overflow-hidden rounded-lg bg-paper p-2 shadow-2xl ring-1 ring-white/10 transition duration-500 ease-out group-hover:-translate-y-3 group-hover:scale-[1.02]"
+                className="relative h-full overflow-hidden rounded-md bg-paper p-2 shadow-2xl ring-1 ring-white/10 transition duration-500 ease-out group-hover:-translate-y-3 group-hover:scale-[1.02]"
                 style={{
                   "--postcard-tilt": `${p.tilt}deg`,
                   boxShadow: `0 24px 70px -24px ${p.glow}A0`,
@@ -39,7 +55,13 @@ export function Postcards() {
                   VI
                 </span>
 
-                <div className="relative aspect-[16/9] w-full overflow-hidden rounded-md bg-ink">
+                <div
+                  className={`relative w-full overflow-hidden rounded-sm bg-ink ${
+                    index === 0
+                      ? "aspect-[4/3] lg:h-full lg:min-h-[30rem]"
+                      : "aspect-[16/9] lg:h-full lg:min-h-[14rem]"
+                  }`}
+                >
                   <Image
                     src={p.src}
                     alt={`${p.name} postcard - Visit Leonida`}
