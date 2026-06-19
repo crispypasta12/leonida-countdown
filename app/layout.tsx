@@ -22,8 +22,8 @@ const mono = JetBrains_Mono({
   display: "swap",
 });
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://leonida-countdown.vercel.app";
-const TITLE = "Leonida Countdown - Grand Theft Auto VI";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://gta-vi-countdown.vercel.app";
+const TITLE = "GTA VI countdown - Grand Theft Auto VI";
 const DESCRIPTION =
   "The unofficial countdown to Grand Theft Auto VI. Pre-orders June 25, launch November 19, 2026. Welcome back to Vice City - welcome to Leonida.";
 
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     url: SITE_URL,
     title: TITLE,
     description: DESCRIPTION,
-    siteName: "Leonida Countdown",
+    siteName: "GTA VI countdown",
     images: [
       {
         url: "/art/og/cover.jpg",

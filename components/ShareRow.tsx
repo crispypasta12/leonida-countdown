@@ -22,12 +22,12 @@ export function ShareRow({
   }, []);
 
   const shareUrl =
-    typeof window !== "undefined" ? window.location.href : "https://leonida-countdown.vercel.app";
+    typeof window !== "undefined" ? window.location.href : "https://gta-vi-countdown.vercel.app";
 
   async function handleShare() {
     if (typeof navigator !== "undefined" && navigator.share) {
       try {
-        await navigator.share({ title: "Leonida Countdown - GTA VI", text: SHARE_TEXT, url: shareUrl });
+        await navigator.share({ title: "GTA VI countdown - GTA VI", text: SHARE_TEXT, url: shareUrl });
         return;
       } catch {
         return;

@@ -1,8 +1,8 @@
 {
-  "name": "leonida-countdown",
+  "name": "gta-vi-countdown",
   "version": "1.0.0",
   "private": true,
-  "description": "Unofficial fan-made GTA VI countdown — neon synthwave hype page for Leonida.",
+  "description": "Unofficial fan-made GTA VI countdown — neon synthwave hype page for Grand Theft Auto VI.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

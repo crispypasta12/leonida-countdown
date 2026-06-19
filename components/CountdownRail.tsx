@@ -59,7 +59,7 @@ export function CountdownRail({ target }: { target: CountdownTarget }) {
 
   function handleCalendar() {
     const ics = buildICS({
-      uid: `gtavi-${target.key}@leonida-countdown`,
+      uid: `gtavi-${target.key}@gta-vi-countdown`,
       title: target.key === "preorder" ? "GTA VI - Pre-Orders Open" : "GTA VI - Launch Day",
       description:
         target.key === "preorder"

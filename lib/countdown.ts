@@ -82,7 +82,7 @@ export function buildICS(opts: {
   return [
     "BEGIN:VCALENDAR",
     "VERSION:2.0",
-    "PRODID:-//Leonida Countdown//Fan Made//EN",
+    "PRODID:-//GTA VI countdown//Fan Made//EN",
     "CALSCALE:GREGORIAN",
     "METHOD:PUBLISH",
     "BEGIN:VEVENT",

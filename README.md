@@ -1,4 +1,4 @@
-# Leonida Countdown — GTA VI Fan Hype Page
+# GTA VI countdown — GTA VI Fan Hype Page
 
 An unofficial, fan-made single-page countdown to **Grand Theft Auto VI**. Neon
 synthwave / Vice City aesthetic, live dual countdowns, postcard gallery, and cast.
